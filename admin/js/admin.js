@@ -409,6 +409,28 @@
     var original = genericPanel;
   })();
 
+  var SOCIAL_PLATFORM_OPTIONS = [
+    { value: 'instagram', label: 'Instagram' },
+    { value: 'linkedin', label: 'LinkedIn' },
+    { value: 'facebook', label: 'Facebook' },
+    { value: 'youtube', label: 'YouTube' },
+    { value: 'tiktok', label: 'TikTok' },
+    { value: 'x', label: 'X (Twitter)' }
+  ];
+  var SOCIAL_PLATFORM_LABELS = {};
+  SOCIAL_PLATFORM_OPTIONS.forEach(function (o) { SOCIAL_PLATFORM_LABELS[o.value] = o.label; });
+
+  PANELS.social_links = genericPanel({
+    table: 'social_links', orderCol: 'sort_order', label: 'Sosyal Medya',
+    hint: 'Site altında (footer) görünen sosyal medya ikonları — platforma göre ikon otomatik seçilir. Buradan ekleyip çıkarabilirsiniz.',
+    title: function (i) { return SOCIAL_PLATFORM_LABELS[i.platform] || i.platform; },
+    subtitle: function (i) { return i.url; },
+    fields: [
+      { name: 'platform', label: 'Platform', type: 'select', options: SOCIAL_PLATFORM_OPTIONS },
+      { name: 'url', label: 'Profil URL', type: 'text' }
+    ]
+  });
+
   // ───────────────────────── Site Metinleri (anahtar/değer) ─────────────────────────
   var SITE_TEXT_KEYS = [
     { key: 'hero_kicker', label: 'Hero — küçük başlık', type: 'text' },

@@ -124,6 +124,9 @@
       { title: 'Konsept ve planlama', description: 'Hedeflerinize uygun yaratıcı bir konsept geliştiriyoruz. Mekân, ekip, bütçe ve takvimi tüm detaylarıyla planlıyoruz.' },
       { title: 'Saha operasyonu ve raporlama', description: 'Sahadaki tüm süreci koordine ediyor, planı hayata geçiriyoruz. Etkinlik sonunda sonuçları ve değerlendirmelerimizi sizinle paylaşıyoruz.' }
     ],
+    social_links: [
+      { platform: 'instagram', url: 'https://www.instagram.com/masterfaceagency/' }
+    ],
     gallery_photos: (function () {
       var arr = [];
       for (var i = 1; i <= 46; i++) {
@@ -158,7 +161,8 @@
       fetchTable('gallery_photos', 'sort_order'),
       fetchTable('form_fields', 'sort_order'),
       fetchTable('categories', 'sort_order'),
-      fetchTable('projects', 'sort_order')
+      fetchTable('projects', 'sort_order'),
+      fetchTable('social_links', 'sort_order')
     ]);
     var siteTextsRows = results[0];
     var logos = results[1] || DEFAULTS.logos;
@@ -169,6 +173,7 @@
     var formFields = results[6] || DEFAULTS.form_fields;
     var categoriesRows = results[7];
     var projectsRows = results[8];
+    var socialLinks = results[9] || DEFAULTS.social_links;
 
     var site_texts = Object.assign({}, DEFAULTS.site_texts);
     if (siteTextsRows) {
@@ -193,7 +198,7 @@
       projects = DEFAULTS.projects;
     }
 
-    return { site_texts: site_texts, logos: logos, stats: stats, services: services, processSteps: processSteps, galleryPhotos: galleryPhotos, formFields: formFields, projects: projects };
+    return { site_texts: site_texts, logos: logos, stats: stats, services: services, processSteps: processSteps, galleryPhotos: galleryPhotos, formFields: formFields, projects: projects, socialLinks: socialLinks };
   }
 
   // ───────────────────────── Yardımcılar ─────────────────────────
@@ -231,6 +236,49 @@
     if (map) map.href = t.contact_map_url;
     var wa = document.getElementById('whatsapp-fab');
     if (wa) wa.href = 'https://wa.me/' + t.whatsapp_number;
+  }
+
+  // ───────────────────────── Render: Sosyal medya ikonları ─────────────────────────
+  var SOCIAL_ICONS = {
+    instagram: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle></svg>',
+    linkedin: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.25h4V23h-4V8.25zM8.5 8.25h3.83v2.02h.05c.53-1 1.84-2.06 3.78-2.06 4.04 0 4.79 2.66 4.79 6.12V23h-4v-6.84c0-1.63-.03-3.74-2.28-3.74-2.28 0-2.63 1.78-2.63 3.62V23h-4V8.25z"></path></svg>',
+    facebook: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"></path></svg>',
+    youtube: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.3 3.5-6.3 3.5z"></path></svg>',
+    tiktok: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2h-3.2v13.9a3 3 0 1 1-2.1-2.86V9.7a6.1 6.1 0 1 0 5.3 6.06V8.4a7.9 7.9 0 0 0 4.6 1.47V6.7a4.7 4.7 0 0 1-4.6-4.7z"></path></svg>',
+    x: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2h3.3l-7.2 8.2L22.8 22h-6.6l-5.2-6.8L4.9 22H1.6l7.7-8.8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.1 4H5.2l11.8 16z"></path></svg>'
+  };
+
+  function renderSocialLinks(links) {
+    var wrap = document.getElementById('footer-social');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    (links || []).forEach(function (s) {
+      if (!s || !s.url || !s.platform) return;
+      var a = el('a', 'social-icon');
+      a.href = s.url; a.target = '_blank'; a.rel = 'noopener';
+      a.setAttribute('aria-label', s.platform);
+      a.innerHTML = SOCIAL_ICONS[s.platform] || SOCIAL_ICONS.instagram;
+      wrap.appendChild(a);
+    });
+  }
+
+  // ───────────────────────── Mobil menü (hamburger) ─────────────────────────
+  function initNavToggle() {
+    var btn = document.getElementById('nav-toggle');
+    var nav = document.getElementById('site-nav');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      var isOpen = nav.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    Array.prototype.forEach.call(nav.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
   }
 
   // ───────────────────────── Render: Logo marquee ─────────────────────────
@@ -543,7 +591,11 @@
     initGallery(data.galleryPhotos);
     renderForm(data.formFields, data.services);
     initFormSubmit();
+    renderSocialLinks(data.socialLinks);
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', function () {
+    initNavToggle();
+    init();
+  });
 })();

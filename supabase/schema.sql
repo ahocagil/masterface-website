@@ -87,6 +87,14 @@ create table if not exists form_fields (
   sort_order  int  not null default 0
 );
 
+-- ───────────────────────── social_links (footer sosyal medya) ───
+create table if not exists social_links (
+  id          uuid primary key default gen_random_uuid(),
+  platform    text not null,  -- instagram | linkedin | facebook | youtube | tiktok | x
+  url         text not null,
+  sort_order  int  not null default 0
+);
+
 -- ───────────────────────── settings (tekil ayarlar) ─────────────
 -- form_recipients: jsonb string[] — "Teklif İste" bildirimi kime gitsin
 create table if not exists settings (
@@ -112,6 +120,7 @@ alter table gallery_photos  enable row level security;
 alter table process_steps   enable row level security;
 alter table site_texts      enable row level security;
 alter table form_fields     enable row level security;
+alter table social_links    enable row level security;
 alter table settings        enable row level security;
 alter table form_submissions enable row level security;
 
@@ -125,6 +134,7 @@ create policy "public read" on gallery_photos  for select using (true);
 create policy "public read" on process_steps   for select using (true);
 create policy "public read" on site_texts      for select using (true);
 create policy "public read" on form_fields     for select using (true);
+create policy "public read" on social_links    for select using (true);
 -- settings tablosu form_recipients gibi hassas alanlar içerebileceğinden
 -- genel okunabilir DEĞİL; sadece admin (authenticated) okur/yazar.
 
@@ -138,6 +148,7 @@ create policy "admin write" on gallery_photos  for all using (auth.role() = 'aut
 create policy "admin write" on process_steps   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 create policy "admin write" on site_texts      for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 create policy "admin write" on form_fields     for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+create policy "admin write" on social_links    for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 create policy "admin all"   on settings        for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 
 -- Form gönderimi: herkes INSERT edebilir (ziyaretçi formu dolduruyor),
