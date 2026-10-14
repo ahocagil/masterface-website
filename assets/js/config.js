@@ -1,7 +1,8 @@
 // Supabase bağlantı ayarları.
 // Project URL, Project ID'den türetildi (Settings → General).
-// SUPABASE_ANON_KEY: Settings → API → "anon / public" anahtarını buraya yapıştır.
+// SUPABASE_ANON_KEY: Settings → API → "Publishable key" (yeni isimlendirmede
+// eski "anon / public" anahtarının karşılığı).
 // Bu anahtar herkese açık olacak şekilde tasarlanmıştır (RLS kuralları korur) —
-// gizli tutulması gereken "service_role" anahtarı DEĞİLDİR, asla onu kullanma.
+// gizli tutulması gereken "Secret key" (eski "service_role") DEĞİLDİR, asla onu kullanma.
 window.SUPABASE_URL = 'https://xqxjdegyyvjrfvsvglf.supabase.co';
-window.SUPABASE_ANON_KEY = 'PASTE_ANON_PUBLIC_KEY_HERE';
+window.SUPABASE_ANON_KEY = 'sb_publishable_qP5lQ0z6JinCG4YOykMfOQ_0AY0KJCP';
