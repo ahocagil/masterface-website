@@ -1,0 +1,44 @@
+.admin-body{background:var(--bg-alt);color:#111;font-family:'Instrument Sans',system-ui,sans-serif}
+
+/* LOGIN */
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:20px}
+.login-form{background:#fff;border-radius:20px;padding:40px;width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px}
+.login-form h1{font-size:28px;margin:0}
+.login-form .muted{color:#777;margin:0 0 8px;font-size:15px}
+.login-form label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+.login-form input{font:inherit;padding:12px 14px;border:1px solid #D7D2C5;border-radius:10px}
+.login-form button{margin-top:8px}
+
+/* SHELL */
+.admin-app{min-height:100vh;display:flex;flex-direction:column}
+.admin-header{display:flex;align-items:center;gap:24px;flex-wrap:wrap;background:#fff;padding:16px clamp(16px,3vw,40px);border-bottom:1px solid #E3DFD2;position:sticky;top:0;z-index:5}
+.admin-header img{height:24px}
+.admin-nav{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.admin-nav button{font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid #DCD7C9;background:transparent;color:#444;cursor:pointer}
+.admin-nav button.active{background:#111;color:#F4F1EA;border-color:#111}
+.admin-main{flex:1;padding:clamp(16px,3vw,40px);max-width:1100px;width:100%;margin:0 auto}
+
+/* PANELS */
+.panel h2{font-size:24px;margin:0 0 6px}
+.panel .hint{color:#777;font-size:14px;margin:0 0 24px}
+.item-card{background:#fff;border:1px solid #E3DFD2;border-radius:16px;padding:18px 20px;margin-bottom:14px;display:flex;gap:16px;align-items:flex-start}
+.item-card .main{flex:1;min-width:0}
+.item-card .main strong{display:block;font-size:17px;margin-bottom:4px}
+.item-card .main p{margin:0;color:#666;font-size:14px;white-space:pre-wrap}
+.item-card .thumb{width:64px;height:48px;border-radius:8px;object-fit:cover;background:#eee;flex:none}
+.item-actions{display:flex;gap:8px;flex:none}
+.item-actions button{font:inherit;font-size:13px;font-weight:600;border-radius:999px;padding:6px 14px;border:1px solid #D7D2C5;background:#FBFAF6;cursor:pointer}
+.item-actions button.danger{color:#B8361A;border-color:#E3B4A4}
+
+.edit-card{background:#F4F1EA;border:1px solid #E3DFD2;border-radius:16px;padding:20px;margin-bottom:24px;display:flex;flex-direction:column;gap:12px}
+.edit-card .row{display:flex;gap:12px;flex-wrap:wrap}
+.edit-card label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:13px;flex:1 1 180px}
+.edit-card input,.edit-card select,.edit-card textarea{font:inherit;padding:10px 12px;border:1px solid #D7D2C5;border-radius:10px;background:#fff}
+.edit-card textarea{resize:vertical;min-height:70px}
+.edit-card .actions{display:flex;gap:10px}
+.btn-primary{background:#111;color:#F4F1EA;font:inherit;font-weight:600;padding:10px 20px;border:0;border-radius:999px;cursor:pointer}
+.btn-secondary{background:transparent;color:#111;font:inherit;font-weight:600;padding:10px 20px;border:1px solid #111;border-radius:999px;cursor:pointer}
+.add-btn{margin-bottom:20px}
+.empty-note{color:#888;font-size:14px;padding:20px 0}
+.checkbox-row{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
+.loading{color:#888;padding:40px 0;text-align:center}

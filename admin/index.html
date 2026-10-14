@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masterface | Yönetim Paneli</title>
+<link rel="icon" href="../assets/logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- GİRİŞ -->
+<section id="login-screen" class="login-screen">
+  <form id="login-form" class="login-form">
+    <img src="../assets/logo.svg" alt="Masterface" style="height:28px;margin-bottom:24px">
+    <h1>Yönetim Paneli</h1>
+    <p class="muted">Devam etmek için giriş yapın.</p>
+    <label>E-posta<input type="email" id="login-email" required autocomplete="username"></label>
+    <label>Şifre<input type="password" id="login-password" required autocomplete="current-password"></label>
+    <button type="submit" class="submit-btn" id="login-submit">Giriş Yap</button>
+    <div id="login-error" class="form-note err"></div>
+  </form>
+</section>
+
+<!-- PANEL -->
+<div id="admin-app" class="admin-app" hidden>
+  <header class="admin-header">
+    <img src="../assets/logo.svg" alt="Masterface">
+    <nav id="admin-nav" class="admin-nav">
+      <button data-tab="site_texts" class="active">Site Metinleri</button>
+      <button data-tab="categories">Kategoriler</button>
+      <button data-tab="projects">Projeler</button>
+      <button data-tab="services">Hizmetler</button>
+      <button data-tab="logos">Logolar</button>
+      <button data-tab="stats">Rakamlar</button>
+      <button data-tab="gallery_photos">Galeri</button>
+      <button data-tab="process_steps">Süreç</button>
+      <button data-tab="form_fields">İletişim Formu</button>
+      <button data-tab="settings">Ayarlar</button>
+      <button data-tab="form_submissions">Gelen Talepler</button>
+    </nav>
+    <button id="logout-btn" class="cta-outline" style="color:#111;border-color:#111">Çıkış</button>
+  </header>
+
+  <main class="admin-main">
+    <div id="panel-root"></div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
