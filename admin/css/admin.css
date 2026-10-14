@@ -12,7 +12,8 @@
 /* SHELL */
 .admin-app{min-height:100vh;display:flex;flex-direction:column}
 .admin-header{display:flex;align-items:center;gap:24px;flex-wrap:wrap;background:#fff;padding:16px clamp(16px,3vw,40px);border-bottom:1px solid #E3DFD2;position:sticky;top:0;z-index:5}
-.admin-header img{height:24px}
+.admin-header img{height:24px;filter:invert(1)}
+.login-form img{filter:invert(1)}
 .admin-nav{display:flex;flex-wrap:wrap;gap:6px;flex:1}
 .admin-nav button{font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid #DCD7C9;background:transparent;color:#444;cursor:pointer}
 .admin-nav button.active{background:#111;color:#F4F1EA;border-color:#111}
