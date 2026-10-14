@@ -17,7 +17,7 @@
     <img src="../assets/logo.svg" alt="Masterface" style="height:28px;margin-bottom:24px">
     <h1>Yönetim Paneli</h1>
     <p class="muted">Devam etmek için giriş yapın.</p>
-    <label>E-posta<input type="email" id="login-email" required autocomplete="username"></label>
+    <label>Kullanıcı adı<input type="text" id="login-email" required autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"></label>
     <label>Şifre<input type="password" id="login-password" required autocomplete="current-password"></label>
     <button type="submit" class="submit-btn" id="login-submit">Giriş Yap</button>
     <div id="login-error" class="form-note err"></div>
@@ -28,6 +28,9 @@
 <div id="admin-app" class="admin-app" hidden>
   <header class="admin-header">
     <img src="../assets/logo.svg" alt="Masterface">
+    <button type="button" class="nav-toggle" id="admin-nav-toggle" aria-label="Menü" aria-expanded="false" aria-controls="admin-nav">
+      <span></span><span></span><span></span>
+    </button>
     <nav id="admin-nav" class="admin-nav">
       <button data-tab="site_texts" class="active">Site Metinleri</button>
       <button data-tab="categories">Kategoriler</button>

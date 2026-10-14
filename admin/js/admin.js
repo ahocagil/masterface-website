@@ -52,10 +52,18 @@
     if (session) showApp(); else showLogin();
   });
 
+  // Kullanıcı adı girilirse sonuna config.js'teki alan adı eklenir
+  // (Supabase Auth e-posta biçimi ister); "@" içeriyorsa olduğu gibi kullanılır.
+  function toLoginEmail(value) {
+    var v = String(value || '').trim();
+    if (v.indexOf('@') !== -1) return v;
+    return v.toLowerCase() + '@' + (window.ADMIN_EMAIL_DOMAIN || 'masterface.com.tr');
+  }
+
   loginForm.addEventListener('submit', async function (ev) {
     ev.preventDefault();
     loginError.textContent = '';
-    var email = document.getElementById('login-email').value.trim();
+    var email = toLoginEmail(document.getElementById('login-email').value);
     var password = document.getElementById('login-password').value;
     var btn = document.getElementById('login-submit');
     btn.disabled = true; btn.textContent = 'Giriş yapılıyor…';
@@ -73,9 +81,19 @@
   var root = document.getElementById('panel-root');
   var CURRENT_TAB = 'site_texts';
 
+  // Mobil hamburger menü
+  var navToggle = document.getElementById('admin-nav-toggle');
+  function setNavOpen(open) {
+    nav.classList.toggle('open', open);
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  navToggle.addEventListener('click', function () { setNavOpen(!nav.classList.contains('open')); });
+
   nav.addEventListener('click', function (ev) {
     var btn = ev.target.closest('button[data-tab]');
     if (!btn) return;
+    setNavOpen(false);
     Array.prototype.forEach.call(nav.querySelectorAll('button'), function (b) { b.classList.remove('active'); });
     btn.classList.add('active');
     CURRENT_TAB = btn.dataset.tab;
@@ -124,7 +142,7 @@
 
       var list = el('div');
       if (!rows.length) {
-        list.appendChild(el('div', 'empty-note', 'Henüz içerik yok. Yukarıdaki butonla ekleyin.'));
+        list.appendChild(el('div', 'empty-note', escapeHtml(config.emptyText || 'Henüz içerik yok. Yukarıdaki butonla ekleyin.')));
       }
       rows.forEach(function (item, idx) {
         var card = el('div', 'item-card');
@@ -279,7 +297,8 @@
 
   PANELS.categories = genericPanel({
     table: 'categories', orderCol: 'sort_order', label: 'Kategoriler',
-    hint: 'Projeler bu kategorilere göre filtrelenir.',
+    hint: 'Ana sayfadaki "Sahada ürettiklerimiz" bölümünde, proje kartlarının üstündeki filtre butonları (Tümü, ...) ve her kartın sol üstündeki etiket buradan gelir. Önce kategori ekleyin, sonra Projeler sekmesinde her projeye bir kategori seçin.',
+    emptyText: 'Henüz kategori yok, bu yüzden projeler sitede "[Kategori]" etiketiyle görünüyor. "+ Yeni Ekle" ile kategorileri (ör. Festival, Roadshow) ekleyin.',
     title: function (i) { return i.label; },
     fields: [{ name: 'label', label: 'Kategori adı', type: 'text' }]
   });
