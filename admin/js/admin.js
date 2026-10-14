@@ -132,7 +132,8 @@
           var src = config.image(item);
           if (src) {
             var img = el('img', 'thumb');
-            img.src = src;
+            // "assets/..." gibi göreli yollar /admin altında kırılmasın
+            img.src = /^(https?:)?\/|^data:/.test(src) ? src : '../' + src;
             card.appendChild(img);
           }
         }

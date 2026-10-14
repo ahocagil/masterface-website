@@ -1,4 +1,4 @@
-.admin-body{background:var(--bg-alt);color:#111;font-family:'Instrument Sans',system-ui,sans-serif}
+.admin-body{background:#F4F1EA;color:#111;font-family:'Instrument Sans',system-ui,sans-serif}
 
 /* LOGIN */
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:20px}
@@ -30,9 +30,11 @@
 .item-actions button{font:inherit;font-size:13px;font-weight:600;border-radius:999px;padding:6px 14px;border:1px solid #D7D2C5;background:#FBFAF6;cursor:pointer}
 .item-actions button.danger{color:#B8361A;border-color:#E3B4A4}
 
-.edit-card{background:#F4F1EA;border:1px solid #E3DFD2;border-radius:16px;padding:20px;margin-bottom:24px;display:flex;flex-direction:column;gap:12px}
+.edit-card{background:#fff;border:1px solid #E3DFD2;border-radius:16px;padding:20px;margin-bottom:24px;display:flex;flex-direction:column;gap:12px}
 .edit-card .row{display:flex;gap:12px;flex-wrap:wrap}
-.edit-card label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:13px;flex:1 1 180px}
+.edit-card label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:13px;flex:none}
+.edit-card .row label{flex:1 1 180px}
+.edit-card .checkbox-row{flex-direction:row}
 .edit-card input,.edit-card select,.edit-card textarea{font:inherit;padding:10px 12px;border:1px solid #D7D2C5;border-radius:10px;background:#fff}
 .edit-card textarea{resize:vertical;min-height:70px}
 .edit-card .actions{display:flex;gap:10px}

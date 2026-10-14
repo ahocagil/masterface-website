@@ -21,6 +21,7 @@ assets/video, assets/gallery, assets/logos, assets/logo.svg → Gerçek medya va
 
 1. [supabase.com](https://supabase.com) üzerinde projeyi açın (proje zaten oluşturuldu).
 2. **SQL Editor** üzerinden `supabase/schema.sql` dosyasının tamamını çalıştırın. Bu, tüm tabloları ve RLS (satır bazlı güvenlik) politikalarını oluşturur.
+   Ardından `supabase/seed.sql` dosyasını çalıştırarak sitedeki mevcut içeriği tablolara aktarın (panelde düzenlenebilir hale gelir). Bu dosya `node supabase/gen-seed.js > supabase/seed.sql` ile `app.js` içindeki varsayılan içerikten üretilir; tabloları boşaltıp yeniden doldurur, dolu bir veritabanında çalıştırmayın.
 3. **Authentication → Users** kısmından panel için bir admin kullanıcı (e-posta + şifre) oluşturun — bu, `/admin` paneline giriş yapacak hesaptır.
 4. **Project Settings → API** sayfasından **anon / public** anahtarı kopyalayın.
 5. `assets/js/config.js` içindeki `SUPABASE_ANON_KEY` değerini bu anahtarla değiştirin. (`SUPABASE_URL` zaten proje adresinize göre ayarlı.)
