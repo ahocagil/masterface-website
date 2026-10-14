@@ -18,13 +18,31 @@
     console.warn('Supabase client başlatılamadı, varsayılan içerik kullanılacak.', e);
   }
 
+  // Supabase geçici olarak yavaş/erişilemez olsa bile sayfa uzun süre
+  // boş kalmasın diye her sorguya kısa bir zaman aşımı konur — süre
+  // dolunca varsayılan içeriğe düşülür, Supabase toparlanınca normal çalışır.
+  var FETCH_TIMEOUT_MS = 4000;
+  function withTimeout(promise, ms) {
+    return new Promise(function (resolve) {
+      var done = false;
+      var timer = setTimeout(function () {
+        if (!done) { done = true; resolve({ data: null, error: new Error('timeout') }); }
+      }, ms);
+      promise.then(function (res) {
+        if (!done) { done = true; clearTimeout(timer); resolve(res); }
+      }).catch(function (e) {
+        if (!done) { done = true; clearTimeout(timer); resolve({ data: null, error: e }); }
+      });
+    });
+  }
+
   async function fetchTable(table, orderCol) {
     if (!supabase) return null;
     try {
       var q = supabase.from(table).select('*');
       if (orderCol) q = q.order(orderCol, { ascending: true });
-      var res = await q;
-      if (res.error) { console.warn('[' + table + ']', res.error.message); return null; }
+      var res = await withTimeout(q, FETCH_TIMEOUT_MS);
+      if (res.error) { console.warn('[' + table + ']', res.error.message || res.error); return null; }
       if (!res.data || !res.data.length) return null;
       return res.data;
     } catch (e) {
@@ -127,21 +145,36 @@
 
   // ───────────────────────── Veri yükleme ─────────────────────────
   async function loadData() {
-    var siteTextsRows = await fetchTable('site_texts');
+    // Tüm tablolar paralel (tek seferde) çekilir — Supabase yavaş/erişilemez
+    // olsa bile her tablo kendi 4sn'lik zaman aşımıyla bağımsız döner, bu
+    // yüzden toplam bekleme süresi tabloların TOPLAMI değil, en yavaş
+    // tekil sorgu kadar olur.
+    var results = await Promise.all([
+      fetchTable('site_texts'),
+      fetchTable('logos', 'sort_order'),
+      fetchTable('stats', 'sort_order'),
+      fetchTable('services', 'sort_order'),
+      fetchTable('process_steps', 'sort_order'),
+      fetchTable('gallery_photos', 'sort_order'),
+      fetchTable('form_fields', 'sort_order'),
+      fetchTable('categories', 'sort_order'),
+      fetchTable('projects', 'sort_order')
+    ]);
+    var siteTextsRows = results[0];
+    var logos = results[1] || DEFAULTS.logos;
+    var stats = results[2] || DEFAULTS.stats;
+    var services = results[3] || DEFAULTS.services;
+    var processSteps = results[4] || DEFAULTS.process_steps;
+    var galleryPhotos = results[5] || DEFAULTS.gallery_photos;
+    var formFields = results[6] || DEFAULTS.form_fields;
+    var categoriesRows = results[7];
+    var projectsRows = results[8];
+
     var site_texts = Object.assign({}, DEFAULTS.site_texts);
     if (siteTextsRows) {
       siteTextsRows.forEach(function (row) { if (row.key) site_texts[row.key] = row.value; });
     }
 
-    var logos = (await fetchTable('logos', 'sort_order')) || DEFAULTS.logos;
-    var stats = (await fetchTable('stats', 'sort_order')) || DEFAULTS.stats;
-    var services = (await fetchTable('services', 'sort_order')) || DEFAULTS.services;
-    var processSteps = (await fetchTable('process_steps', 'sort_order')) || DEFAULTS.process_steps;
-    var galleryPhotos = (await fetchTable('gallery_photos', 'sort_order')) || DEFAULTS.gallery_photos;
-    var formFields = (await fetchTable('form_fields', 'sort_order')) || DEFAULTS.form_fields;
-
-    var categoriesRows = await fetchTable('categories', 'sort_order');
-    var projectsRows = await fetchTable('projects', 'sort_order');
     var projects;
     if (projectsRows) {
       var catsById = {};
