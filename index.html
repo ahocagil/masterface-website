@@ -127,10 +127,13 @@
         <div><div class="k" data-i18n="k_email">E-posta</div><a id="contact-email" href="mailto:info@masterface.com.tr">info@masterface.com.tr</a></div>
         <div><div class="k" data-i18n="k_instagram">Instagram</div><a id="contact-instagram" href="https://www.instagram.com/masterfaceagency/">@masterfaceagency</a></div>
       </div>
-      <a class="map-link" id="contact-map" href="https://www.google.com/maps/place/Talatpa%C5%9Fa,+G%C3%B6k+Sk.,+34400+Ka%C4%9F%C4%B1thane%2F%C4%B0stanbul,+T%C3%BCrkiye/@41.064673,28.961802,15z/data=!4m6!3m5!1s0x14cab72fcbedce9f:0x307774bdc1c2f5fb!8m2!3d41.064673!4d28.961802!16s%2Fg%2F1tdlq_h0?hl=en-US&entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B5850" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-        <span data-i18n="map_link">Google Haritalar'da görüntüle</span>
-      </a>
+      <div class="map-box">
+        <iframe id="contact-map-frame" title="Masterface — Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <a class="map-link" id="contact-map" href="https://www.google.com/maps/place/Talatpa%C5%9Fa,+G%C3%B6k+Sk.,+34400+Ka%C4%9F%C4%B1thane%2F%C4%B0stanbul,+T%C3%BCrkiye/@41.064673,28.961802,15z/data=!4m6!3m5!1s0x14cab72fcbedce9f:0x307774bdc1c2f5fb!8m2!3d41.064673!4d28.961802!16s%2Fg%2F1tdlq_h0?hl=en-US&entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+          <span data-i18n="map_link">Google Haritalar'da görüntüle</span>
+        </a>
+      </div>
     </div>
     <form class="contact" id="contact-form" novalidate>
       <div class="fields-row" id="contact-fields"><!-- app.js doldurur (form_fields tablosundan) --></div>

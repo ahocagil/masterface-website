@@ -392,6 +392,15 @@
     if (insta) { insta.href = t.contact_instagram_url; insta.textContent = t.contact_instagram_handle; }
     var map = document.getElementById('contact-map');
     if (map) map.href = t.contact_map_url;
+    // Harita gömme: koordinat Google Haritalar bağlantısındaki "@enlem,boylam" kısmından alınır;
+    // yoksa adres metniyle aranır. Sadece adres değiştiyse iframe yeniden yüklenir.
+    var frame = document.getElementById('contact-map-frame');
+    if (frame) {
+      var m = /@(-?\d+\.\d+),(-?\d+\.\d+)/.exec(t.contact_map_url || '');
+      var q = m ? (m[1] + ',' + m[2]) : encodeURIComponent(String(t.contact_address || '').replace(/<br\s*\/?>/gi, ', '));
+      var src = 'https://maps.google.com/maps?q=' + q + '&z=15&hl=' + state.lang + '&output=embed';
+      if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
+    }
     var wa = document.getElementById('whatsapp-fab');
     if (wa) wa.href = 'https://wa.me/' + t.whatsapp_number;
   }
