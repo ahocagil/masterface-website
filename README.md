@@ -33,6 +33,8 @@ assets/video, assets/gallery, assets/logos, assets/logo.svg → Gerçek medya va
 
 **Görsel yükleme:** Panelde Hizmetler, Logolar ve Galeri'deki görsel alanında "Görsel yükle" butonu vardır; dosya Supabase Storage'daki herkese açık `media` kovasına yüklenir ve adresi kendiliğinden yazılır. Kova yeni kurulumda `supabase/storage.sql` ile oluşturulur (bir kez çalıştırın). Görseller Supabase'de durduğu için siteyi başka hostinge taşırken ayrıca taşımak gerekmez.
 
+**Renk teması:** Panelde "Renkler" sekmesinden 6 ana renk (iki koyu zemin, koyu zemindeki yazı, vurgu, açık bölüm zemini ve yazısı) seçilir veya hazır temalardan biri uygulanır; önizleme canlıdır ve okunabilirlik uyarısı verir. Diğer tüm tonlar (kenarlık, soluk yazı, vurgu üstündeki siyah/beyaz yazı vb.) `assets/js/theme.js` kurallarıyla otomatik türetilir. Renkler `site_texts` tablosunda `theme_*` anahtarlarıyla saklanır, ek SQL gerekmez; "Varsayılana dön" kayıtları siler.
+
 ### 2) İçerik girişi
 
 `/admin` adresine gidip adım 3'te oluşturduğunuz hesapla giriş yapın. Tüm bölümler (Site Metinleri — Türkçe/English/Deutsch sekmeli; Hizmetler, Projeler, Kategoriler, Rakamlar, Süreç ve Form alanlarında kayıt düzenlerken "Çeviriler" kutusu; boş bırakılan çeviri Türkçe gösterilir, Site Metinleri, Projeler, Hizmetler, Logolar, Rakamlar, Galeri, Süreç, İletişim Formu Alanları, Ayarlar) buradan yönetilir.

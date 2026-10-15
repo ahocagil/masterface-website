@@ -619,6 +619,119 @@
     root.appendChild(wrap);
   };
 
+  // ───────────────────────── Renkler (site geneli tema) ─────────────────────────
+  var THEME_FIELDS = [
+    { key: 'bg', label: 'Ana arka plan (koyu)', hint: 'Sayfanın genel koyu zemini: hero, projeler, footer.' },
+    { key: 'bg_alt', label: 'İkinci koyu zemin', hint: 'Logo bandı ve "Nasıl çalışıyoruz" bölümü.' },
+    { key: 'ink', label: 'Koyu zemin üstündeki yazı', hint: 'Başlıklar ve metinler. Soluk tonlar otomatik türer.' },
+    { key: 'accent', label: 'Vurgu rengi', hint: '"Teklif Al" düğmesi, çizgiler, rakamlar, seçili filtre.' },
+    { key: 'cream', label: 'Açık bölüm zemini', hint: 'Hizmetler ve İletişim bölümlerinin arka planı.' },
+    { key: 'cream_ink', label: 'Açık bölümdeki yazı', hint: 'Açık zeminli bölümlerin yazı ve düğme rengi.' }
+  ];
+  var THEME_PRESETS = [
+    { name: 'Varsayılan', c: { bg: '#111113', bg_alt: '#1A1A1E', ink: '#F4F1EA', accent: '#FF5A36', cream: '#F4F1EA', cream_ink: '#111113' } },
+    { name: 'Gece mavisi', c: { bg: '#0E1424', bg_alt: '#151D33', ink: '#EEF2FA', accent: '#4F8CFF', cream: '#EEF2FA', cream_ink: '#0E1424' } },
+    { name: 'Orman', c: { bg: '#0F1A14', bg_alt: '#16251C', ink: '#F1F5EE', accent: '#7BD389', cream: '#F1F5EE', cream_ink: '#0F1A14' } },
+    { name: 'Bordo', c: { bg: '#1A0F13', bg_alt: '#26151B', ink: '#F7EFEA', accent: '#E8506A', cream: '#F7EFEA', cream_ink: '#1A0F13' } },
+    { name: 'Altın', c: { bg: '#14110C', bg_alt: '#1E1A12', ink: '#F6F1E6', accent: '#E8B33C', cream: '#F6F1E6', cream_ink: '#14110C' } }
+  ];
+
+  PANELS.colors = async function () {
+    var T = window.MF_THEME;
+    var keys = T.ORDER.map(function (k) { return 'theme_' + k; });
+    var res = await sb.from('site_texts').select('*').in('key', keys);
+    var current = {};
+    (res.data || []).forEach(function (row) { current['theme_' + row.key.replace('theme_', '')] = row.value; });
+    var colors = T.fromTexts(current);
+
+    var wrap = el('div', 'panel');
+    wrap.appendChild(el('h2', null, 'Renkler'));
+    wrap.appendChild(el('p', 'hint', 'Sitenin tüm renkleri buradaki 6 ana renkten türer. Kenarlıklar, soluk yazılar, vurgu üstündeki yazı (siyah/beyaz) ve açık bölümlerdeki vurgulu yazılar otomatik hesaplanır. Önizlemede değişikliği görün, beğenirseniz Kaydet\'e basın.'));
+
+    var presets = el('div', 'theme-presets');
+    var card = el('div', 'edit-card');
+    var inputs = {};
+    var preview = el('div', 'theme-preview');
+    var warn = el('div', 'theme-warn');
+
+    function refresh() {
+      T.apply(colors, preview);
+      var msgs = [];
+      if (T.contrast(colors.ink, colors.bg) < 4.5) msgs.push('Koyu zemin üstündeki yazı okunaklı değil (kontrast düşük).');
+      if (T.contrast(colors.cream_ink, colors.cream) < 4.5) msgs.push('Açık bölümdeki yazı okunaklı değil (kontrast düşük).');
+      if (T.contrast(colors.accent, colors.bg) < 3) msgs.push('Vurgu rengi koyu zeminde zor seçiliyor.');
+      warn.innerHTML = msgs.length ? msgs.map(function (m) { return '<div>⚠ ' + escapeHtml(m) + '</div>'; }).join('') : '';
+      T.ORDER.forEach(function (k) {
+        inputs[k].color.value = colors[k].toLowerCase();
+        inputs[k].text.value = colors[k];
+      });
+    }
+
+    THEME_PRESETS.forEach(function (p) {
+      var b = el('button', 'theme-preset');
+      b.type = 'button';
+      b.innerHTML = '<span class="sw">' + [p.c.bg, p.c.accent, p.c.cream].map(function (x) { return '<i style="background:' + x + '"></i>'; }).join('') + '</span>' + escapeHtml(p.name);
+      b.addEventListener('click', function () { colors = T.normalize(p.c); refresh(); });
+      presets.appendChild(b);
+    });
+    wrap.appendChild(presets);
+
+    var grid = el('div', 'theme-grid');
+    THEME_FIELDS.forEach(function (f) {
+      var row = el('label', 'theme-row');
+      row.appendChild(el('span', 'theme-label', escapeHtml(f.label) + '<small>' + escapeHtml(f.hint) + '</small>'));
+      var ctl = el('span', 'theme-ctl');
+      var color = el('input'); color.type = 'color';
+      var text = el('input'); text.type = 'text'; text.maxLength = 7; text.spellcheck = false;
+      color.addEventListener('input', function () { colors[f.key] = color.value.toUpperCase(); refresh(); });
+      text.addEventListener('input', function () {
+        var v = text.value.trim(); if (v && v[0] !== '#') v = '#' + v;
+        if (T.isHex(v)) { colors[f.key] = v.toUpperCase(); refresh(); }
+      });
+      text.addEventListener('blur', function () { text.value = colors[f.key]; });
+      ctl.appendChild(color); ctl.appendChild(text);
+      row.appendChild(ctl);
+      grid.appendChild(row);
+      inputs[f.key] = { color: color, text: text };
+    });
+    card.appendChild(grid);
+
+    preview.innerHTML =
+      '<div class="tp-dark"><div class="tp-kicker">ETKİNLİK · AKTİVASYON</div><div class="tp-title">Markaları deneyime dönüştürüyoruz</div><div class="tp-sub">Soluk metin örneği: yaratıcı fikirleri sahaya taşıyoruz.</div>' +
+      '<div class="tp-btns"><span class="tp-btn">Teklif Al</span><span class="tp-chip">Tümü</span><span class="tp-chip off">Festival</span></div></div>' +
+      '<div class="tp-alt"><b>150+</b> Tamamlanan proje</div>' +
+      '<div class="tp-light"><div class="tp-lkicker">HİZMETLERİMİZ</div><div class="tp-card"><span class="tp-no">01</span> Festival ve Etkinlik Yönetimi<p>Açık bölümdeki açıklama metni örneği.</p></div><span class="tp-dbtn">Teklif İste →</span></div>';
+    card.appendChild(el('h3', null, 'Önizleme'));
+    card.appendChild(preview);
+    card.appendChild(warn);
+
+    var actions = el('div', 'actions');
+    var save = el('button', 'btn-primary', 'Kaydet');
+    save.addEventListener('click', async function () {
+      save.disabled = true; save.textContent = 'Kaydediliyor…';
+      var rows = T.ORDER.map(function (k) { return { key: 'theme_' + k, value: colors[k] }; });
+      var r = await sb.from('site_texts').upsert(rows);
+      save.disabled = false; save.textContent = 'Kaydet';
+      if (r.error) alert('Kaydedilemedi: ' + r.error.message);
+      else alert('Kaydedildi. Site yenilendiğinde yeni renkler görünür.');
+    });
+    var reset = el('button', 'btn-secondary', 'Varsayılana dön');
+    reset.addEventListener('click', async function () {
+      if (!confirm('Tüm renkler orijinal tasarıma döndürülsün mü?')) return;
+      colors = T.normalize(T.DEFAULTS); refresh();
+      var r = await sb.from('site_texts').delete().in('key', keys);
+      if (r.error) alert('Sıfırlanamadı: ' + r.error.message);
+      else alert('Varsayılan renklere dönüldü.');
+    });
+    actions.appendChild(save); actions.appendChild(reset);
+    card.appendChild(actions);
+    wrap.appendChild(card);
+
+    root.innerHTML = '';
+    root.appendChild(wrap);
+    refresh();
+  };
+
   // ───────────────────────── Ayarlar (form_recipients) ─────────────────────────
   PANELS.settings = async function () {
     var res = await sb.from('settings').select('*').eq('key', 'form_recipients').maybeSingle();

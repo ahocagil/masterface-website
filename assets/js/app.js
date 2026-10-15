@@ -813,6 +813,10 @@
     // önce varsayılan (çevrili) içerikle çiz.
     if (state.lang !== 'tr') { state.data = defaultsData(); renderAll(); }
     state.data = await loadData();
+    if (window.MF_THEME) { // panelden seçilen renk teması
+      var theme = MF_THEME.fromTexts(state.data.site_texts);
+      MF_THEME.apply(theme); MF_THEME.cache(theme);
+    }
     renderLogos(state.data.logos);
     initGallery(state.data.galleryPhotos);
     initFormSubmit();
