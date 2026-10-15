@@ -66,3 +66,11 @@ Site tamamen statik olduğu için herhangi bir hostinge (cPanel, Plesk, FTP, Net
 - Forma yazılan talepler hangi dilde geldiyse `lang` alanıyla birlikte "Gelen Talepler"de görünür; "Etkinlik türü" değeri dilden bağımsız olarak Türkçe başlık olarak kaydedilir.
 - "Etkinlik türü" seçimi, Hizmetlerimiz tablosundaki başlıklardan otomatik türer — iki yerde ayrı ayrı tutulan bir liste yoktur.
 - Form gönderimleri `form_submissions` tablosuna yazılır ve panelin "Gelen Talepler" sekmesinden görüntülenir/silinebilir. Aynı anda `supabase/mail.sql` tetikleyicisi, "Ayarlar"daki tüm alıcı adreslere Resend üzerinden e-posta gönderir. Kurulum: `supabase/mail.sql`'i SQL Editor'de bir kez çalıştırın; resend.com'da hesap açıp masterface.com.tr alan adını doğrulayın (DNS'e SPF/DKIM kayıtları), API anahtarını ve gönderen adresi panel > Ayarlar'a girin. Backend Supabase'te kaldığı için hosting taşınsa da çalışmaya devam eder.
+
+## Yeni Supabase projesine taşıma (müşteri hesabı)
+1. supabase.com'da yeni proje oluştur (bölge: Frankfurt/eu-central-1 önerilir, güçlü bir DB şifresi kaydet).
+2. SQL Editor'de `supabase/setup-all.sql` dosyasının tamamını yapıştırıp çalıştır (şema + depolama + mail tetikleyicisi + başlangıç verisi). "Potential issue" uyarısı çıkarsa Run query.
+3. Authentication → Users → Add user: `admin@masterface.com.tr` + şifre, **Auto Confirm User** işaretli.
+4. Settings → API'den Project URL ve Publishable key'i al, `assets/js/config.js` içindeki `SUPABASE_URL` / `SUPABASE_ANON_KEY` değerlerine yaz.
+5. Authentication → URL Configuration: Site URL'yi `https://masterface.com.tr` yap.
+6. /admin → Ayarlar'a Resend anahtarını ve gönderen adresi gir.
