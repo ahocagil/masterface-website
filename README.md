@@ -31,6 +31,8 @@ assets/video, assets/gallery, assets/logos, assets/logo.svg → Gerçek medya va
 
 **Çok dil (TR / EN / DE):** Site Türkçe (ana dil), İngilizce ve Almanca sunulur; ziyaretçi menüdeki açılır dil seçiciden değiştirir, seçim hatırlanır (`?lang=en` ile de açılır). Yeni kurulumda `schema.sql` zaten çeviri sütunlarını (`i18n`) içerir. **Daha önce kurulmuş bir veritabanında** SQL Editor'da bir kez `supabase/migrate-i18n.sql` çalıştırın (sütunları ekler, mevcut içeriğin EN/DE çevirilerini doldurur, hiçbir veriyi silmez). Çevirileri değiştirmek için `app.js` içindeki `DEFAULTS` düzenlenip `node supabase/gen-i18n.js > supabase/migrate-i18n.sql` ile yeniden üretilebilir; günlük kullanımda panelden yönetilir.
 
+**Görsel yükleme:** Panelde Hizmetler, Logolar ve Galeri'deki görsel alanında "Görsel yükle" butonu vardır; dosya Supabase Storage'daki herkese açık `media` kovasına yüklenir ve adresi kendiliğinden yazılır. Kova yeni kurulumda `supabase/storage.sql` ile oluşturulur (bir kez çalıştırın). Görseller Supabase'de durduğu için siteyi başka hostinge taşırken ayrıca taşımak gerekmez.
+
 ### 2) İçerik girişi
 
 `/admin` adresine gidip adım 3'te oluşturduğunuz hesapla giriş yapın. Tüm bölümler (Site Metinleri — Türkçe/English/Deutsch sekmeli; Hizmetler, Projeler, Kategoriler, Rakamlar, Süreç ve Form alanlarında kayıt düzenlerken "Çeviriler" kutusu; boş bırakılan çeviri Türkçe gösterilir, Site Metinleri, Projeler, Hizmetler, Logolar, Rakamlar, Galeri, Süreç, İletişim Formu Alanları, Ayarlar) buradan yönetilir.

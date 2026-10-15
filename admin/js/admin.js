@@ -209,6 +209,53 @@
     return patch;
   }
 
+  // Görsel alanı: URL kutusunun altına "Görsel yükle" butonu (Supabase Storage → "media" kovası).
+  var MAX_UPLOAD_MB = 8;
+  function attachImageUpload(label, urlInput, f) {
+    urlInput.placeholder = 'https://… veya assets/… (ya da aşağıdan yükleyin)';
+    var bar = el('div', 'upload-bar');
+    var btn = el('button', 'btn-secondary upload-btn', 'Görsel yükle');
+    btn.type = 'button';
+    var file = el('input'); file.type = 'file'; file.accept = 'image/*'; file.hidden = true;
+    var status = el('span', 'upload-status');
+    var preview = el('img', 'upload-preview'); preview.alt = '';
+    function showPreview() {
+      var v = urlInput.value.trim();
+      if (!v) { preview.hidden = true; return; }
+      preview.src = /^(https?:)?\//.test(v) ? v : '/' + v;
+      preview.hidden = false;
+    }
+    preview.onerror = function () { preview.hidden = true; };
+    urlInput.addEventListener('change', showPreview);
+    showPreview();
+    btn.addEventListener('click', function () { file.click(); });
+    file.addEventListener('change', async function () {
+      var fl = file.files && file.files[0];
+      if (!fl) return;
+      if (fl.size > MAX_UPLOAD_MB * 1024 * 1024) { status.textContent = 'Dosya ' + MAX_UPLOAD_MB + ' MB\'ı geçemez.'; status.className = 'upload-status err'; return; }
+      btn.disabled = true; status.className = 'upload-status'; status.textContent = 'Yükleniyor…';
+      try {
+        var ext = (fl.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+        var base = slugify(fl.name.replace(/\.[^.]+$/, '')) || 'gorsel';
+        var path = (f.folder || 'genel') + '/' + Date.now() + '-' + base + '.' + ext;
+        var up = await sb.storage.from('media').upload(path, fl, { contentType: fl.type || undefined, upsert: false });
+        if (up.error) throw up.error;
+        var pub = sb.storage.from('media').getPublicUrl(path);
+        urlInput.value = pub.data.publicUrl;
+        showPreview();
+        status.textContent = 'Yüklendi — Kaydet\'e basmayı unutmayın.';
+      } catch (e) {
+        status.className = 'upload-status err';
+        status.textContent = 'Yüklenemedi: ' + (e.message || e);
+      } finally {
+        btn.disabled = false; file.value = '';
+      }
+    });
+    bar.appendChild(btn); bar.appendChild(status); bar.appendChild(file);
+    label.appendChild(bar);
+    label.appendChild(preview);
+  }
+
   var I18N_LANGS = [{ code: 'en', name: 'English' }, { code: 'de', name: 'Deutsch' }];
 
   function renderEditForm(host, config, item, extra, onDone) {
@@ -250,6 +297,7 @@
       }
       if (f.disabledOnEdit && item) input.disabled = true;
       label.appendChild(input);
+      if (f.type === 'image') attachImageUpload(label, input, f);
       row.appendChild(label);
       inputs[f.name] = { input: input, field: f };
     });
@@ -400,7 +448,7 @@
     fields: [
       { name: 'title', label: 'Başlık', type: 'text' },
       { name: 'description', label: 'Açıklama', type: 'textarea' },
-      { name: 'image_url', label: 'Görsel URL (opsiyonel)', type: 'text' }
+      { name: 'image_url', label: 'Görsel (opsiyonel)', type: 'image', folder: 'hizmetler' }
     ]
   });
 
@@ -410,7 +458,7 @@
     image: function (i) { return i.image_url; },
     fields: [
       { name: 'label', label: 'Marka adı', type: 'text' },
-      { name: 'image_url', label: 'Logo görsel URL', type: 'text' }
+      { name: 'image_url', label: 'Logo görseli', type: 'image', folder: 'logolar' }
     ]
   });
 
@@ -428,7 +476,7 @@
     hint: 'Kart yığını slider burada görünen sırayla ilerler.',
     title: function (i) { return i.image_url ? i.image_url.split('/').pop() : '[görsel]'; },
     image: function (i) { return i.image_url; },
-    fields: [{ name: 'image_url', label: 'Görsel URL', type: 'text' }]
+    fields: [{ name: 'image_url', label: 'Görsel', type: 'image', folder: 'galeri' }]
   });
 
   PANELS.process_steps = genericPanel({
