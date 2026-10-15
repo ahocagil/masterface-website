@@ -734,27 +734,42 @@
 
   // ───────────────────────── Ayarlar (form_recipients) ─────────────────────────
   PANELS.settings = async function () {
-    var res = await sb.from('settings').select('*').eq('key', 'form_recipients').maybeSingle();
-    var current = (res.data && res.data.value) || ['info@masterface.com.tr'];
+    var rs = await sb.from('settings').select('*').in('key', ['form_recipients', 'mail_api_key', 'mail_from']);
+    var map = {};
+    (rs.data || []).forEach(function (r) { map[r.key] = r.value; });
+    var current = map.form_recipients || ['info@masterface.com.tr'];
 
     var wrap = el('div', 'panel');
     wrap.appendChild(el('h2', null, 'Ayarlar'));
-    wrap.appendChild(el('p', 'hint', '"Teklif İste" formundan gelen talepler hangi e-posta adres(ler)ine iletilsin?'));
+    wrap.appendChild(el('p', 'hint', '"Teklif İste" formundan gelen her talep, aşağıdaki adreslerin hepsine e-posta olarak gönderilir (ayrıca "Gelen Talepler"de saklanır).'));
 
     var card = el('div', 'edit-card');
-    var label = el('label');
-    label.appendChild(document.createTextNode('E-posta adresleri (virgülle ayırın)'));
-    var input = el('input');
-    input.type = 'text';
-    input.value = current.join(', ');
-    label.appendChild(input);
-    card.appendChild(label);
+    function field(text, val, type, ph) {
+      var label = el('label');
+      label.appendChild(document.createTextNode(text));
+      var input = el('input');
+      input.type = type || 'text';
+      input.value = val || '';
+      if (ph) input.placeholder = ph;
+      label.appendChild(input);
+      card.appendChild(label);
+      return input;
+    }
+    var inRcpt = field('Alıcı e-posta adresleri (virgülle ayırın)', current.join(', '));
+    var inFrom = field('Gönderen adres (Resend\'de doğrulanmış alan adından)', map.mail_from || '', 'text', 'Masterface <noreply@masterface.com.tr>');
+    var inKey = field('Resend API anahtarı', map.mail_api_key || '', 'password', 're_…');
+    card.appendChild(el('p', 'hint', 'E-posta servisi: resend.com (ücretsiz plan yeterli). Anahtar sadece giriş yapmış yöneticiler tarafından okunabilir. Anahtar boşsa mail gönderilmez, talepler yine de kaydedilir.'));
 
     var saveBtn = el('button', 'btn-primary', 'Kaydet');
     saveBtn.addEventListener('click', async function () {
-      var list = input.value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+      var list = inRcpt.value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+      var bad = list.filter(function (m) { return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m); });
+      if (!list.length || bad.length) { alert('Geçersiz e-posta adresi: ' + (bad.join(', ') || '(boş)')); return; }
       saveBtn.disabled = true; saveBtn.textContent = 'Kaydediliyor…';
-      var res2 = await sb.from('settings').upsert([{ key: 'form_recipients', value: list }]);
+      var rows = [{ key: 'form_recipients', value: list }];
+      if (inFrom.value.trim()) rows.push({ key: 'mail_from', value: inFrom.value.trim() });
+      if (inKey.value.trim()) rows.push({ key: 'mail_api_key', value: inKey.value.trim() });
+      var res2 = await sb.from('settings').upsert(rows);
       saveBtn.disabled = false; saveBtn.textContent = 'Kaydet';
       if (res2.error) alert('Kaydedilemedi: ' + res2.error.message);
       else alert('Kaydedildi.');
