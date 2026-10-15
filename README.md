@@ -12,6 +12,7 @@ assets/js/config.js       → Supabase bağlantı bilgileri (URL + anon key)
 assets/js/app.js          → Ana sayfa veri çekme + render mantığı
 admin/js/admin.js         → Panel CRUD mantığı
 supabase/schema.sql        → Veritabanı şeması + RLS politikaları
+supabase/migrate-i18n.sql   → Mevcut veritabanına çok dil (TR/EN/DE) ekler, veri silmez
 assets/video, assets/gallery, assets/logos, assets/logo.svg → Gerçek medya varlıkları
 ```
 
@@ -28,9 +29,11 @@ assets/video, assets/gallery, assets/logos, assets/logo.svg → Gerçek medya va
 
 > `anon` anahtarı herkese açık olacak şekilde tasarlanmıştır (RLS kuralları korur). **`service_role` anahtarını hiçbir zaman** istemci tarafı kodda kullanmayın.
 
+**Çok dil (TR / EN / DE):** Site Türkçe (ana dil), İngilizce ve Almanca sunulur; ziyaretçi menüdeki açılır dil seçiciden değiştirir, seçim hatırlanır (`?lang=en` ile de açılır). Yeni kurulumda `schema.sql` zaten çeviri sütunlarını (`i18n`) içerir. **Daha önce kurulmuş bir veritabanında** SQL Editor'da bir kez `supabase/migrate-i18n.sql` çalıştırın (sütunları ekler, mevcut içeriğin EN/DE çevirilerini doldurur, hiçbir veriyi silmez). Çevirileri değiştirmek için `app.js` içindeki `DEFAULTS` düzenlenip `node supabase/gen-i18n.js > supabase/migrate-i18n.sql` ile yeniden üretilebilir; günlük kullanımda panelden yönetilir.
+
 ### 2) İçerik girişi
 
-`/admin` adresine gidip adım 3'te oluşturduğunuz hesapla giriş yapın. Tüm bölümler (Site Metinleri, Projeler, Hizmetler, Logolar, Rakamlar, Galeri, Süreç, İletişim Formu Alanları, Ayarlar) buradan yönetilir.
+`/admin` adresine gidip adım 3'te oluşturduğunuz hesapla giriş yapın. Tüm bölümler (Site Metinleri — Türkçe/English/Deutsch sekmeli; Hizmetler, Projeler, Kategoriler, Rakamlar, Süreç ve Form alanlarında kayıt düzenlerken "Çeviriler" kutusu; boş bırakılan çeviri Türkçe gösterilir, Site Metinleri, Projeler, Hizmetler, Logolar, Rakamlar, Galeri, Süreç, İletişim Formu Alanları, Ayarlar) buradan yönetilir.
 
 Supabase tabloları boşken site, bu depodaki varsayılan (demo) içerikle görüntülenir — panelden ilk veriler girildiği anda otomatik olarak gerçek veriye geçer.
 
@@ -56,5 +59,6 @@ Site tamamen statik olduğu için herhangi bir hostinge (cPanel, Plesk, FTP, Net
 
 ## Notlar
 
+- Forma yazılan talepler hangi dilde geldiyse `lang` alanıyla birlikte "Gelen Talepler"de görünür; "Etkinlik türü" değeri dilden bağımsız olarak Türkçe başlık olarak kaydedilir.
 - "Etkinlik türü" seçimi, Hizmetlerimiz tablosundaki başlıklardan otomatik türer — iki yerde ayrı ayrı tutulan bir liste yoktur.
 - Form gönderimleri `form_submissions` tablosuna yazılır ve panelin "Gelen Talepler" sekmesinden görüntülenir/silinebilir. Hangi e-posta adres(ler)ine bildirim gitmesi gerektiği "Ayarlar" sekmesinden ayarlanır (e-posta gönderimi için ayrıca bir entegrasyon — örn. Supabase Edge Function + e-posta servisi — kurulması gerekir, bu depo sadece hedef adres listesini saklar).

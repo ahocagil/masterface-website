@@ -17,7 +17,23 @@ insert into site_texts (key, value) values
   ('contact_instagram_handle', '@masterfaceagency'),
   ('contact_instagram_url', 'https://www.instagram.com/masterfaceagency/'),
   ('contact_map_url', 'https://www.google.com/maps/place/Talatpa%C5%9Fa,+G%C3%B6k+Sk.,+34400+Ka%C4%9F%C4%B1thane%2F%C4%B0stanbul,+T%C3%BCrkiye/@41.064673,28.961802,15z/data=!4m6!3m5!1s0x14cab72fcbedce9f:0x307774bdc1c2f5fb!8m2!3d41.064673!4d28.961802!16s%2Fg%2F1tdlq_h0?hl=en-US&entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D'),
-  ('footer_bottom', '© 2026 Masterface Etkinlik Ajansı. Tüm hakları saklıdır.');
+  ('footer_bottom', '© 2026 Masterface Etkinlik Ajansı. Tüm hakları saklıdır.'),
+  ('hero_kicker_en', 'Events · Activation · Stands'),
+  ('hero_kicker_de', 'Events · Aktivierung · Messestände'),
+  ('hero_title_en', 'We turn brands into experiences'),
+  ('hero_title_de', 'Wir verwandeln Marken in Erlebnisse'),
+  ('hero_subtitle_en', 'At every point where brands meet their target audiences, we bring creative ideas to life through strong field operations.'),
+  ('hero_subtitle_de', 'Überall dort, wo Marken auf ihre Zielgruppen treffen, setzen wir kreative Ideen mit starker Umsetzung vor Ort um.'),
+  ('about_title_en', 'We bring ideas to life and brands to the field!'),
+  ('about_title_de', 'Wir bringen Ideen zum Leben und Marken ins Feld!'),
+  ('about_body_1_en', 'We design events that connect brands with people and carefully bring every idea to life on the ground. We take on the whole process from planning to execution; with a strong team, creative solutions and meticulous coordination, we make sure every detail falls into place.'),
+  ('about_body_1_de', 'Wir gestalten Events, die Marken mit Menschen zusammenbringen, und setzen jede Idee vor Ort mit Sorgfalt um. Wir übernehmen den gesamten Prozess von der Planung bis zur Umsetzung; mit einem starken Team, kreativen Lösungen und sorgfältiger Koordination sorgen wir dafür, dass jedes Detail sitzt.'),
+  ('about_body_2_en', 'Our goal is to turn your brand''s story into moments people take part in, experience and remember. At the heart of our work are open communication, trust and creating together.'),
+  ('about_body_2_de', 'Unser Ziel ist es, die Geschichte Ihrer Marke in Momente zu verwandeln, an denen Menschen teilnehmen, die sie erleben und an die sie sich erinnern. Im Mittelpunkt unserer Arbeit stehen offene Kommunikation, Vertrauen und gemeinsames Schaffen.'),
+  ('contact_address_en', 'Talatpaşa Mh. Gök Sk. 5, 34400<br>Kağıthane / Istanbul'),
+  ('contact_address_de', 'Talatpaşa Mh. Gök Sk. 5, 34400<br>Kağıthane / Istanbul'),
+  ('footer_bottom_en', '© 2026 Masterface Event Agency. All rights reserved.'),
+  ('footer_bottom_de', '© 2026 Masterface Eventagentur. Alle Rechte vorbehalten.');
 insert into logos (label, image_url, sort_order) values
   ('Yves Rocher', '/assets/logos/yves-rocher.webp', 1),
   ('Dydo', '/assets/logos/dydo.webp', 2),
@@ -35,23 +51,23 @@ insert into logos (label, image_url, sort_order) values
   ('Privia Security', '/assets/logos/privia-security.webp', 14),
   ('Timus', '/assets/logos/timus.webp', 15),
   ('Terra Pizza', '/assets/logos/terra-pizza.webp', 16);
-insert into stats (value, label, sort_order) values
-  ('150+', 'Tamamlanan proje', 1),
-  ('17+', 'Birlikte çalışılan marka', 2),
-  ('60+', 'Saha operasyonu yapılan şehir', 3),
-  ('2018', 'Kuruluş yılı', 4);
-insert into services (title, description, image_url, sort_order) values
-  ('Festival ve Etkinlik Yönetimi', 'Markanızın yer almak istediği festival ve etkinliklerde; organizatör görüşmelerinden alan anlaşmalarına, sözleşme süreçlerinden stand kurulumu ve personel yönetimine kadar tüm süreci sizin için yönetiyoruz.', null, 1),
-  ('Roadshow ve Mobil Etkinlikler', 'Markanızı farklı şehirlerde, meydanlarda ve yaşam alanlarında tüketicilerle buluşturuyoruz. Ürün tanıtımı, sampling ve yaratıcı saha aktiviteleriyle dikkat çeken, enerjisi yüksek ve akılda kalıcı etkinlikler gerçekleştiriyoruz.', null, 2),
-  ('Sampling ve Tadım Etkinlikleri', 'Markanızın ürünlerini doğru yerde, doğru zamanda, doğru hedef kitleyle buluşturuyoruz. Tadım aktiviteleri, ürün dağıtımları ve yaratıcı saha uygulamalarıyla tüketicilerin markanızı yakından tanımasını ve deneyimlemesini sağlıyoruz.', null, 3),
-  ('Stand Tasarımı ve Üretimi', 'Markanızın kimliğini yansıtan, dikkat çekici ve işlevsel standlar tasarlıyor, üretiyor ve hayata geçiriyoruz. Fuar, festival ve etkinlik alanlarında tasarımdan üretime, kurulumdan söküme kadar tüm süreci yönetiyoruz.', null, 4),
-  ('Kurumsal Etkinlikler ve Organizasyonlar', 'Şirket içi kutlamalardan yılbaşı partilerine, motivasyon etkinliklerinden özel davetlere kadar her anı unutulmaz bir deneyime dönüştürüyoruz. Çalışanları bir araya getiren, eğlenceyi ve ekip ruhunu ön plana çıkaran organizasyonlar tasarlıyoruz.', null, 5),
-  ('Üniversite Şenlikleri ve Kariyer Günleri', 'Markanızı kampüslerin enerjisiyle buluşturuyoruz! Üniversite şenliklerinden kariyer günlerine, marka tanıtımlarından eğlenceli deneyim alanlarına kadar gençlerle doğrudan iletişim kurmanızı sağlayan etkinlikleri planlıyor ve hayata geçiriyoruz.', null, 6),
-  ('Toplantı ve Organizasyon Yönetimi', 'Bayi toplantılarından lansmanlara, şirket buluşmalarından özel davetlere kadar tüm organizasyonlarınızı profesyonelce planlıyoruz. Mekân seçiminden teknik altyapıya, sahne ve dekorasyondan operasyon yönetimine kadar her detayı sizin için düşünüyoruz.', null, 7);
-insert into process_steps (title, description, sort_order) values
-  ('Keşif ve brief', 'Markanızı, hedeflerinizi ve kitlenizi dinliyoruz. İhtiyaçlarınızı netleştirerek projenin yol haritasını birlikte oluşturuyoruz.', 1),
-  ('Konsept ve planlama', 'Hedeflerinize uygun yaratıcı bir konsept geliştiriyoruz. Mekân, ekip, bütçe ve takvimi tüm detaylarıyla planlıyoruz.', 2),
-  ('Saha operasyonu ve raporlama', 'Sahadaki tüm süreci koordine ediyor, planı hayata geçiriyoruz. Etkinlik sonunda sonuçları ve değerlendirmelerimizi sizinle paylaşıyoruz.', 3);
+insert into stats (value, label, sort_order, i18n) values
+  ('150+', 'Tamamlanan proje', 1, '{"en":{"label":"Completed projects"},"de":{"label":"Abgeschlossene Projekte"}}'::jsonb),
+  ('17+', 'Birlikte çalışılan marka', 2, '{"en":{"label":"Brands we work with"},"de":{"label":"Betreute Marken"}}'::jsonb),
+  ('60+', 'Saha operasyonu yapılan şehir', 3, '{"en":{"label":"Cities with field operations"},"de":{"label":"Städte mit Einsätzen vor Ort"}}'::jsonb),
+  ('2018', 'Kuruluş yılı', 4, '{"en":{"label":"Year founded"},"de":{"label":"Gründungsjahr"}}'::jsonb);
+insert into services (title, description, image_url, sort_order, i18n) values
+  ('Festival ve Etkinlik Yönetimi', 'Markanızın yer almak istediği festival ve etkinliklerde; organizatör görüşmelerinden alan anlaşmalarına, sözleşme süreçlerinden stand kurulumu ve personel yönetimine kadar tüm süreci sizin için yönetiyoruz.', null, 1, '{"en":{"title":"Festival and Event Management","description":"We manage the entire process for the festivals and events your brand wants to be part of: from organizer negotiations and space agreements to contracts, stand setup and staff management."},"de":{"title":"Festival- und Eventmanagement","description":"Für die Festivals und Events, bei denen Ihre Marke präsent sein möchte, übernehmen wir den gesamten Prozess: von Gesprächen mit den Veranstaltern und Flächenvereinbarungen über Verträge bis zu Standaufbau und Personalmanagement."}}'::jsonb),
+  ('Roadshow ve Mobil Etkinlikler', 'Markanızı farklı şehirlerde, meydanlarda ve yaşam alanlarında tüketicilerle buluşturuyoruz. Ürün tanıtımı, sampling ve yaratıcı saha aktiviteleriyle dikkat çeken, enerjisi yüksek ve akılda kalıcı etkinlikler gerçekleştiriyoruz.', null, 2, '{"en":{"title":"Roadshows and Mobile Events","description":"We bring your brand to consumers in different cities, squares and public spaces. With product launches, sampling and creative field activities, we deliver high-energy, memorable events that grab attention."},"de":{"title":"Roadshows und mobile Events","description":"Wir bringen Ihre Marke in verschiedenen Städten, auf Plätzen und in Lebensräumen zu den Konsumenten. Mit Produktpräsentationen, Sampling und kreativen Aktionen vor Ort realisieren wir aufmerksamkeitsstarke, energiegeladene und einprägsame Events."}}'::jsonb),
+  ('Sampling ve Tadım Etkinlikleri', 'Markanızın ürünlerini doğru yerde, doğru zamanda, doğru hedef kitleyle buluşturuyoruz. Tadım aktiviteleri, ürün dağıtımları ve yaratıcı saha uygulamalarıyla tüketicilerin markanızı yakından tanımasını ve deneyimlemesini sağlıyoruz.', null, 3, '{"en":{"title":"Sampling and Tasting Events","description":"We connect your products with the right audience at the right place and time. Tasting activities, product distribution and creative field executions let consumers get to know and experience your brand up close."},"de":{"title":"Sampling und Verkostungen","description":"Wir bringen Ihre Produkte zur richtigen Zeit am richtigen Ort zur richtigen Zielgruppe. Mit Verkostungen, Produktverteilungen und kreativen Aktionen vor Ort erleben Konsumenten Ihre Marke hautnah."}}'::jsonb),
+  ('Stand Tasarımı ve Üretimi', 'Markanızın kimliğini yansıtan, dikkat çekici ve işlevsel standlar tasarlıyor, üretiyor ve hayata geçiriyoruz. Fuar, festival ve etkinlik alanlarında tasarımdan üretime, kurulumdan söküme kadar tüm süreci yönetiyoruz.', null, 4, '{"en":{"title":"Stand Design and Production","description":"We design, produce and realize eye-catching, functional stands that reflect your brand identity. At trade fairs, festivals and event venues we manage everything from design to production, installation to dismantling."},"de":{"title":"Standdesign und Standbau","description":"Wir entwerfen, produzieren und realisieren auffällige, funktionale Stände, die Ihre Markenidentität widerspiegeln. Auf Messen, Festivals und Eventflächen betreuen wir alles von Design und Produktion bis zu Aufbau und Abbau."}}'::jsonb),
+  ('Kurumsal Etkinlikler ve Organizasyonlar', 'Şirket içi kutlamalardan yılbaşı partilerine, motivasyon etkinliklerinden özel davetlere kadar her anı unutulmaz bir deneyime dönüştürüyoruz. Çalışanları bir araya getiren, eğlenceyi ve ekip ruhunu ön plana çıkaran organizasyonlar tasarlıyoruz.', null, 5, '{"en":{"title":"Corporate Events and Organizations","description":"From in-house celebrations to New Year''s parties, from motivation events to private invitations, we turn every moment into an unforgettable experience. We design events that bring employees together and put fun and team spirit first."},"de":{"title":"Firmenevents und Organisation","description":"Von internen Feiern über Silvesterpartys bis zu Motivationsevents und privaten Einladungen verwandeln wir jeden Moment in ein unvergessliches Erlebnis. Wir gestalten Veranstaltungen, die Mitarbeitende zusammenbringen und Spaß sowie Teamgeist in den Mittelpunkt stellen."}}'::jsonb),
+  ('Üniversite Şenlikleri ve Kariyer Günleri', 'Markanızı kampüslerin enerjisiyle buluşturuyoruz! Üniversite şenliklerinden kariyer günlerine, marka tanıtımlarından eğlenceli deneyim alanlarına kadar gençlerle doğrudan iletişim kurmanızı sağlayan etkinlikleri planlıyor ve hayata geçiriyoruz.', null, 6, '{"en":{"title":"University Festivals and Career Days","description":"We bring your brand together with the energy of campuses! From university festivals to career days, from brand presentations to fun experience areas, we plan and run events that let you communicate directly with young people."},"de":{"title":"Uni-Festivals und Karrieretage","description":"Wir bringen Ihre Marke mit der Energie der Campus zusammen! Von Uni-Festivals über Karrieretage und Markenpräsentationen bis zu spaßigen Erlebnisflächen planen und realisieren wir Events, mit denen Sie direkt mit jungen Menschen in Kontakt treten."}}'::jsonb),
+  ('Toplantı ve Organizasyon Yönetimi', 'Bayi toplantılarından lansmanlara, şirket buluşmalarından özel davetlere kadar tüm organizasyonlarınızı profesyonelce planlıyoruz. Mekân seçiminden teknik altyapıya, sahne ve dekorasyondan operasyon yönetimine kadar her detayı sizin için düşünüyoruz.', null, 7, '{"en":{"title":"Meeting and Event Management","description":"From dealer meetings to launches, company gatherings to private invitations, we plan all your events professionally. From venue selection to technical infrastructure, stage and decoration to operations management, we think of every detail for you."},"de":{"title":"Meeting- und Eventmanagement","description":"Von Händlertreffen über Produktlaunches und Firmentreffen bis zu privaten Einladungen planen wir all Ihre Veranstaltungen professionell. Von der Locationwahl über Technik und Bühne bis zu Dekoration und Operations kümmern wir uns um jedes Detail."}}'::jsonb);
+insert into process_steps (title, description, sort_order, i18n) values
+  ('Keşif ve brief', 'Markanızı, hedeflerinizi ve kitlenizi dinliyoruz. İhtiyaçlarınızı netleştirerek projenin yol haritasını birlikte oluşturuyoruz.', 1, '{"en":{"title":"Discovery and brief","description":"We listen to your brand, goals and audience. We clarify your needs and build the project roadmap together."},"de":{"title":"Kennenlernen und Briefing","description":"Wir hören Ihnen zu: Marke, Ziele und Zielgruppe. Wir schärfen Ihre Anforderungen und erarbeiten gemeinsam den Fahrplan des Projekts."}}'::jsonb),
+  ('Konsept ve planlama', 'Hedeflerinize uygun yaratıcı bir konsept geliştiriyoruz. Mekân, ekip, bütçe ve takvimi tüm detaylarıyla planlıyoruz.', 2, '{"en":{"title":"Concept and planning","description":"We develop a creative concept that fits your goals. We plan venue, team, budget and schedule in full detail."},"de":{"title":"Konzept und Planung","description":"Wir entwickeln ein kreatives Konzept, das zu Ihren Zielen passt. Location, Team, Budget und Zeitplan planen wir bis ins Detail."}}'::jsonb),
+  ('Saha operasyonu ve raporlama', 'Sahadaki tüm süreci koordine ediyor, planı hayata geçiriyoruz. Etkinlik sonunda sonuçları ve değerlendirmelerimizi sizinle paylaşıyoruz.', 3, '{"en":{"title":"Field operations and reporting","description":"We coordinate the entire process on site and bring the plan to life. After the event we share the results and our evaluations with you."},"de":{"title":"Umsetzung vor Ort und Reporting","description":"Wir koordinieren den gesamten Ablauf vor Ort und setzen den Plan um. Nach dem Event teilen wir Ergebnisse und Auswertungen mit Ihnen."}}'::jsonb);
 insert into gallery_photos (image_url, sort_order) values
   ('/assets/gallery/gallery-01.jpg', 1),
   ('/assets/gallery/gallery-02.jpg', 2),
@@ -99,25 +115,25 @@ insert into gallery_photos (image_url, sort_order) values
   ('/assets/gallery/gallery-44.jpg', 44),
   ('/assets/gallery/gallery-45.jpg', 45),
   ('/assets/gallery/gallery-46.jpg', 46);
-insert into projects (name, brand, city, year, youtube_id, sort_order) values
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'gvm6JGzLG2M', 1),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', '2rlN-i-ts2g', 2),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'w_sGq5_zeI8', 3),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'aQkfNgB5ZPg', 4),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'HCjoKcrBuXo', 5),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'nuOHaFKKMI4', 6),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'Ji5Fh_YlIGs', 7),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'ZbptAG-sf7c', 8),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', '3A6C587v42o', 9),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'cBD6wzq2nB4', 10),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'uvXkcouXBbE', 11),
-  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'SSytzQygDXc', 12);
-insert into form_fields (id, label, type, required, width, options, sort_order) values
-  ('name', 'Adınız', 'text', true, 'half', null, 1),
-  ('email', 'E-posta', 'email', true, 'half', null, 2),
-  ('phone', 'Telefon', 'phone', false, 'half', null, 3),
-  ('eventType', 'Etkinlik türü', 'select', true, 'half', null, 4),
-  ('eventDate', 'Etkinlik tarihi', 'daterange', false, 'full', null, 5),
-  ('message', 'Mesajınız', 'textarea', false, 'full', null, 6);
+insert into projects (name, brand, city, year, youtube_id, sort_order, i18n) values
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'gvm6JGzLG2M', 1, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', '2rlN-i-ts2g', 2, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'w_sGq5_zeI8', 3, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'aQkfNgB5ZPg', 4, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'HCjoKcrBuXo', 5, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'nuOHaFKKMI4', 6, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'Ji5Fh_YlIGs', 7, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'ZbptAG-sf7c', 8, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', '3A6C587v42o', 9, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'cBD6wzq2nB4', 10, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'uvXkcouXBbE', 11, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb),
+  ('[Proje adı]', '[Marka]', '[Şehir]', '[Yıl]', 'SSytzQygDXc', 12, '{"en":{"name":"[Project name]","brand":"[Brand]","city":"[City]","year":"[Year]"},"de":{"name":"[Projektname]","brand":"[Marke]","city":"[Stadt]","year":"[Jahr]"}}'::jsonb);
+insert into form_fields (id, label, type, required, width, options, sort_order, i18n) values
+  ('name', 'Adınız', 'text', true, 'half', null, 1, '{"en":{"label":"Your name"},"de":{"label":"Ihr Name"}}'::jsonb),
+  ('email', 'E-posta', 'email', true, 'half', null, 2, '{"en":{"label":"Email"},"de":{"label":"E-Mail"}}'::jsonb),
+  ('phone', 'Telefon', 'phone', false, 'half', null, 3, '{"en":{"label":"Phone"},"de":{"label":"Telefon"}}'::jsonb),
+  ('eventType', 'Etkinlik türü', 'select', true, 'half', null, 4, '{"en":{"label":"Event type"},"de":{"label":"Veranstaltungsart"}}'::jsonb),
+  ('eventDate', 'Etkinlik tarihi', 'daterange', false, 'full', null, 5, '{"en":{"label":"Event date"},"de":{"label":"Veranstaltungsdatum"}}'::jsonb),
+  ('message', 'Mesajınız', 'textarea', false, 'full', null, 6, '{"en":{"label":"Your message"},"de":{"label":"Ihre Nachricht"}}'::jsonb);
 insert into settings (key, value) values ('form_recipients', '["info@masterface.com.tr"]'::jsonb) on conflict (key) do nothing;
 commit;

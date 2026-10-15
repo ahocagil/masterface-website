@@ -4,12 +4,18 @@
 
 create extension if not exists "pgcrypto";
 
+-- ÇOK DİL: `i18n` sütunu çeviri tutar. Ana dil Türkçe (normal sütunlar);
+-- örn. services.i18n = {"en":{"title":"…","description":"…"},"de":{…}}.
+-- Boş bırakılan çeviri Türkçe metne düşer. Mevcut veritabanı için: supabase/migrate-i18n.sql
+-- Site metinlerinde çeviri ayrı anahtardır: hero_title_en, hero_title_de …
+
 -- ───────────────────────── categories ─────────────────────────
 create table if not exists categories (
   id          uuid primary key default gen_random_uuid(),
   label       text not null,
   sort_order  int  not null default 0,
-  created_at  timestamptz not null default now()
+  created_at  timestamptz not null default now(),
+  i18n        jsonb
 );
 
 -- ───────────────────────── projects ───────────────────────────
@@ -22,7 +28,8 @@ create table if not exists projects (
   category_id   uuid references categories(id) on delete set null,
   youtube_id    text,            -- video kimliği (thumb + link otomatik türer)
   sort_order    int  not null default 0,
-  created_at    timestamptz not null default now()
+  created_at    timestamptz not null default now(),
+  i18n        jsonb
 );
 
 -- ───────────────────────── services ───────────────────────────
@@ -32,7 +39,8 @@ create table if not exists services (
   description text,
   image_url   text,
   sort_order  int  not null default 0,
-  created_at  timestamptz not null default now()
+  created_at  timestamptz not null default now(),
+  i18n        jsonb
 );
 
 -- ───────────────────────── logos (referanslar) ─────────────────
@@ -49,7 +57,8 @@ create table if not exists stats (
   id          uuid primary key default gen_random_uuid(),
   value       text not null,
   label       text not null,
-  sort_order  int  not null default 0
+  sort_order  int  not null default 0,
+  i18n        jsonb
 );
 
 -- ───────────────────────── gallery (hakkımızda slider) ─────────
@@ -64,7 +73,8 @@ create table if not exists process_steps (
   id          uuid primary key default gen_random_uuid(),
   title       text not null,
   description text,
-  sort_order  int  not null default 0
+  sort_order  int  not null default 0,
+  i18n        jsonb
 );
 
 -- ───────────────────────── site_texts (düz metin alanları) ─────
@@ -84,7 +94,8 @@ create table if not exists form_fields (
   required    boolean not null default false,
   width       text not null default 'half', -- half | full
   options     jsonb,                    -- select tipi için seçenekler
-  sort_order  int  not null default 0
+  sort_order  int  not null default 0,
+  i18n        jsonb
 );
 
 -- ───────────────────────── social_links (footer sosyal medya) ───

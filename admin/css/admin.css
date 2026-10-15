@@ -67,3 +67,15 @@
   .login-form{padding:28px}
   .edit-card .actions{flex-wrap:wrap}
 }
+
+/* ÇOK DİL */
+.i18n-title{margin:6px 0 0;font-size:15px}
+.i18n-title small{font-weight:400;color:#888}
+.i18n-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.i18n-col{display:flex;flex-direction:column;gap:12px;background:#FBFAF6;border:1px solid #E3DFD2;border-radius:12px;padding:14px}
+.i18n-lang{font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#B8361A}
+.lang-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.lang-tab{font:inherit;font-size:14px;font-weight:600;padding:8px 18px;border-radius:999px;border:1px solid #DCD7C9;background:transparent;color:#444;cursor:pointer}
+.lang-tab.active{background:#111;color:#F4F1EA;border-color:#111}
+.lang-group{display:flex;flex-direction:column;gap:12px}
+@media (max-width:860px){.i18n-cols{grid-template-columns:1fr}}

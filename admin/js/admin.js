@@ -209,6 +209,8 @@
     return patch;
   }
 
+  var I18N_LANGS = [{ code: 'en', name: 'English' }, { code: 'de', name: 'Deutsch' }];
+
   function renderEditForm(host, config, item, extra, onDone) {
     host.innerHTML = '';
     var card = el('div', 'edit-card');
@@ -253,6 +255,32 @@
     });
     card.appendChild(row);
 
+    // Çeviriler (EN / DE): config.i18n = çevrilebilir alan adları. Boş bırakılan çeviri sitede Türkçe metne düşer.
+    var i18nInputs = {};
+    if (config.i18n && config.i18n.length) {
+      card.appendChild(el('h4', 'i18n-title', 'Çeviriler <small>(boş bırakılırsa Türkçe metin gösterilir)</small>'));
+      var cols = el('div', 'i18n-cols');
+      I18N_LANGS.forEach(function (lg) {
+        var col = el('div', 'i18n-col');
+        col.appendChild(el('div', 'i18n-lang', escapeHtml(lg.name)));
+        i18nInputs[lg.code] = {};
+        config.i18n.forEach(function (fname) {
+          var f = config.fields.filter(function (x) { return x.name === fname; })[0] || { label: fname, type: 'text' };
+          var lab = el('label');
+          lab.appendChild(document.createTextNode(f.label + ' (' + lg.code.toUpperCase() + ')'));
+          var inp = f.type === 'textarea' ? el('textarea') : el('input');
+          if (f.type !== 'textarea') inp.type = 'text';
+          var cur = item && item.i18n && item.i18n[lg.code] ? item.i18n[lg.code][fname] : '';
+          inp.value = cur || '';
+          lab.appendChild(inp);
+          col.appendChild(lab);
+          i18nInputs[lg.code][fname] = inp;
+        });
+        cols.appendChild(col);
+      });
+      card.appendChild(cols);
+    }
+
     var actions = el('div', 'actions');
     var saveBtn = el('button', 'btn-primary', 'Kaydet');
     saveBtn.addEventListener('click', async function () {
@@ -266,6 +294,18 @@
         if (f.transformIn) val = f.transformIn(val);
         payload[name] = val;
       });
+      if (config.i18n && config.i18n.length) {
+        var tr = {};
+        I18N_LANGS.forEach(function (lg) {
+          var o = {};
+          config.i18n.forEach(function (fname) {
+            var v = i18nInputs[lg.code][fname].value.trim();
+            if (v) o[fname] = v;
+          });
+          if (Object.keys(o).length) tr[lg.code] = o;
+        });
+        payload.i18n = Object.keys(tr).length ? tr : null;
+      }
       if (config.beforeSave) payload = config.beforeSave(payload, item, extra);
       saveBtn.disabled = true; saveBtn.textContent = 'Kaydediliyor…';
       try {
@@ -296,7 +336,7 @@
   var PANELS = {};
 
   PANELS.categories = genericPanel({
-    table: 'categories', orderCol: 'sort_order', label: 'Kategoriler',
+    table: 'categories', orderCol: 'sort_order', label: 'Kategoriler', i18n: ['label'],
     hint: 'Ana sayfadaki "Sahada ürettiklerimiz" bölümünde, proje kartlarının üstündeki filtre butonları (Tümü, ...) ve her kartın sol üstündeki etiket buradan gelir. Önce kategori ekleyin, sonra Projeler sekmesinde her projeye bir kategori seçin.',
     emptyText: 'Henüz kategori yok, bu yüzden projeler sitede "[Kategori]" etiketiyle görünüyor. "+ Yeni Ekle" ile kategorileri (ör. Festival, Roadshow) ekleyin.',
     title: function (i) { return i.label; },
@@ -330,7 +370,7 @@
       var res = await sb.from('categories').select('*').order('sort_order', { ascending: true });
       var cats = res.data || [];
       var cfg = {
-        table: 'projects', orderCol: 'sort_order', label: 'Projeler',
+        table: 'projects', orderCol: 'sort_order', label: 'Projeler', i18n: ['name', 'brand', 'city'],
         hint: 'Her projeye bir YouTube video kimliği (ID) ve kategori atayın. Önce Kategoriler sekmesinden kategori ekleyin.',
         title: function (i) { return i.name || '[Proje adı]'; },
         subtitle: function (i) {
@@ -352,7 +392,7 @@
   })();
 
   PANELS.services = genericPanel({
-    table: 'services', orderCol: 'sort_order', label: 'Hizmetlerimiz',
+    table: 'services', orderCol: 'sort_order', label: 'Hizmetlerimiz', i18n: ['title', 'description'],
     hint: 'Buradaki başlıklar, iletişim formundaki "Etkinlik türü" seçeneklerini de otomatik günceller.',
     title: function (i) { return i.title; },
     subtitle: function (i) { return i.description; },
@@ -375,7 +415,7 @@
   });
 
   PANELS.stats = genericPanel({
-    table: 'stats', orderCol: 'sort_order', label: 'Rakamlar',
+    table: 'stats', orderCol: 'sort_order', label: 'Rakamlar', i18n: ['label'],
     title: function (i) { return i.value + ' — ' + i.label; },
     fields: [
       { name: 'value', label: 'Değer (örn: 150+)', type: 'text' },
@@ -392,7 +432,7 @@
   });
 
   PANELS.process_steps = genericPanel({
-    table: 'process_steps', orderCol: 'sort_order', label: 'Nasıl Çalışıyoruz (Süreç)',
+    table: 'process_steps', orderCol: 'sort_order', label: 'Nasıl Çalışıyoruz (Süreç)', i18n: ['title', 'description'],
     title: function (i) { return i.title; },
     subtitle: function (i) { return i.description; },
     fields: [
@@ -402,7 +442,7 @@
   });
 
   PANELS.form_fields = genericPanel({
-    table: 'form_fields', orderCol: 'sort_order', label: 'İletişim Formu Alanları',
+    table: 'form_fields', orderCol: 'sort_order', label: 'İletişim Formu Alanları', i18n: ['label'],
     hint: '"Etkinlik türü" (select) seçeneklerini özel olarak buraya yazmazsanız, Hizmetlerimiz başlıklarından otomatik gelir.',
     title: function (i) { return i.label + ' (' + i.type + ')' + (i.required ? ' · zorunlu' : ''); },
     subtitle: function (i) { return 'Alan kimliği: ' + i.id + ' · Genişlik: ' + (i.width === 'full' ? 'Tam' : 'Yarım'); },
@@ -453,21 +493,21 @@
 
   // ───────────────────────── Site Metinleri (anahtar/değer) ─────────────────────────
   var SITE_TEXT_KEYS = [
-    { key: 'hero_kicker', label: 'Hero — küçük başlık', type: 'text' },
-    { key: 'hero_title', label: 'Hero — başlık', type: 'text' },
-    { key: 'hero_subtitle', label: 'Hero — alt metin', type: 'textarea' },
-    { key: 'about_title', label: 'Hakkımızda — başlık', type: 'text' },
-    { key: 'about_body_1', label: 'Hakkımızda — 1. paragraf', type: 'textarea' },
-    { key: 'about_body_2', label: 'Hakkımızda — 2. paragraf', type: 'textarea' },
+    { key: 'hero_kicker', label: 'Hero — küçük başlık', type: 'text', i18n: true },
+    { key: 'hero_title', label: 'Hero — başlık', type: 'text', i18n: true },
+    { key: 'hero_subtitle', label: 'Hero — alt metin', type: 'textarea', i18n: true },
+    { key: 'about_title', label: 'Hakkımızda — başlık', type: 'text', i18n: true },
+    { key: 'about_body_1', label: 'Hakkımızda — 1. paragraf', type: 'textarea', i18n: true },
+    { key: 'about_body_2', label: 'Hakkımızda — 2. paragraf', type: 'textarea', i18n: true },
     { key: 'whatsapp_number', label: 'WhatsApp numarası (ülke kodu ile, örn: 905536872886)', type: 'text' },
-    { key: 'contact_address', label: 'Adres (HTML <br> kullanılabilir)', type: 'textarea' },
+    { key: 'contact_address', label: 'Adres (HTML <br> kullanılabilir)', type: 'textarea', i18n: true },
     { key: 'contact_phone_display', label: 'Telefon (görünen)', type: 'text' },
     { key: 'contact_phone_tel', label: 'Telefon (tel: linki, örn: +905536872886)', type: 'text' },
     { key: 'contact_email', label: 'E-posta', type: 'text' },
     { key: 'contact_instagram_handle', label: 'Instagram (görünen, örn: @masterfaceagency)', type: 'text' },
     { key: 'contact_instagram_url', label: 'Instagram URL', type: 'text' },
     { key: 'contact_map_url', label: 'Google Haritalar URL', type: 'text' },
-    { key: 'footer_bottom', label: 'Footer alt metni (telif)', type: 'text' }
+    { key: 'footer_bottom', label: 'Footer alt metni (telif)', type: 'text', i18n: true }
   ];
 
   PANELS.site_texts = async function () {
@@ -477,28 +517,52 @@
 
     var wrap = el('div', 'panel');
     wrap.appendChild(el('h2', null, 'Site Metinleri'));
-    wrap.appendChild(el('p', 'hint', 'Ana sayfadaki sabit metinleri buradan düzenleyin.'));
+    wrap.appendChild(el('p', 'hint', 'Ana sayfadaki sabit metinleri buradan düzenleyin. Ana dil Türkçe\'dir; İngilizce ve Almanca sekmelerinde boş bıraktığınız metin sitede Türkçe görünür. Telefon, e-posta, WhatsApp gibi dile bağlı olmayan alanlar yalnızca Türkçe sekmesindedir.'));
 
+    var tabs = el('div', 'lang-tabs');
+    var langs = [{ code: 'tr', name: 'Türkçe' }, { code: 'en', name: 'English' }, { code: 'de', name: 'Deutsch' }];
     var card = el('div', 'edit-card');
     var inputs = {};
-    SITE_TEXT_KEYS.forEach(function (k) {
-      var label = el('label');
-      label.appendChild(document.createTextNode(k.label));
-      var input = k.type === 'textarea' ? el('textarea') : el('input');
-      if (k.type !== 'textarea') input.type = 'text';
-      input.value = current[k.key] || '';
-      label.appendChild(input);
-      card.appendChild(label);
-      inputs[k.key] = input;
+    var groups = {};
+
+    langs.forEach(function (lg) {
+      var group = el('div', 'lang-group');
+      group.hidden = lg.code !== 'tr';
+      groups[lg.code] = group;
+      SITE_TEXT_KEYS.forEach(function (k) {
+        if (lg.code !== 'tr' && !k.i18n) return;
+        var dbKey = lg.code === 'tr' ? k.key : k.key + '_' + lg.code;
+        var label = el('label');
+        label.appendChild(document.createTextNode(k.label + (lg.code === 'tr' ? '' : ' (' + lg.code.toUpperCase() + ')')));
+        var input = k.type === 'textarea' ? el('textarea') : el('input');
+        if (k.type !== 'textarea') input.type = 'text';
+        input.value = current[dbKey] || '';
+        if (lg.code !== 'tr') input.placeholder = current[k.key] || '';
+        label.appendChild(input);
+        group.appendChild(label);
+        inputs[dbKey] = input;
+      });
+      card.appendChild(group);
+
+      var tab = el('button', 'lang-tab' + (lg.code === 'tr' ? ' active' : ''), escapeHtml(lg.name));
+      tab.type = 'button';
+      tab.addEventListener('click', function () {
+        Object.keys(groups).forEach(function (c) { groups[c].hidden = c !== lg.code; });
+        Array.prototype.forEach.call(tabs.children, function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+      });
+      tabs.appendChild(tab);
     });
+    wrap.appendChild(tabs);
+
     var saveBtn = el('button', 'btn-primary', 'Kaydet');
     saveBtn.addEventListener('click', async function () {
       saveBtn.disabled = true; saveBtn.textContent = 'Kaydediliyor…';
-      var rows = SITE_TEXT_KEYS.map(function (k) { return { key: k.key, value: inputs[k.key].value }; });
+      var rows = Object.keys(inputs).map(function (key) { return { key: key, value: inputs[key].value }; });
       var res2 = await sb.from('site_texts').upsert(rows);
       saveBtn.disabled = false; saveBtn.textContent = 'Kaydet';
       if (res2.error) alert('Kaydedilemedi: ' + res2.error.message);
-      else alert('Kaydedildi.');
+      else alert('Kaydedildi (üç dil).');
     });
     card.appendChild(saveBtn);
     wrap.appendChild(card);

@@ -53,6 +53,16 @@
 
   // ───────────────────────── Varsayılan içerik ─────────────────────────
   // (Panel/Supabase henüz boşsa veya erişilemiyorsa bu içerik gösterilir.)
+  // @defaults-start
+  // Çeviriler: öğelerde `i18n: { en:{…}, de:{…} }`, site metinlerinde `anahtar_en` / `anahtar_de`.
+  // Ana dil Türkçe'dir; çeviri boşsa Türkçe metin gösterilir.
+  var PH_I18N = {
+    en: { name: '[Project name]', brand: '[Brand]', city: '[City]', year: '[Year]', category: '[Category]' },
+    de: { name: '[Projektname]', brand: '[Marke]', city: '[Stadt]', year: '[Jahr]', category: '[Kategorie]' }
+  };
+  var PH_PROJECT = { en: { name: PH_I18N.en.name, brand: PH_I18N.en.brand, city: PH_I18N.en.city, year: PH_I18N.en.year },
+                     de: { name: PH_I18N.de.name, brand: PH_I18N.de.brand, city: PH_I18N.de.city, year: PH_I18N.de.year } };
+  var PH_CATEGORY = { en: { label: PH_I18N.en.category }, de: { label: PH_I18N.de.category } };
   var DEFAULTS = {
     site_texts: {
       hero_kicker: 'Etkinlik · Aktivasyon · Stand',
@@ -69,7 +79,23 @@
       contact_instagram_handle: '@masterfaceagency',
       contact_instagram_url: 'https://www.instagram.com/masterfaceagency/',
       contact_map_url: 'https://www.google.com/maps/place/Talatpa%C5%9Fa,+G%C3%B6k+Sk.,+34400+Ka%C4%9F%C4%B1thane%2F%C4%B0stanbul,+T%C3%BCrkiye/@41.064673,28.961802,15z/data=!4m6!3m5!1s0x14cab72fcbedce9f:0x307774bdc1c2f5fb!8m2!3d41.064673!4d28.961802!16s%2Fg%2F1tdlq_h0?hl=en-US&entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D',
-      footer_bottom: '© 2026 Masterface Etkinlik Ajansı. Tüm hakları saklıdır.'
+      footer_bottom: '© 2026 Masterface Etkinlik Ajansı. Tüm hakları saklıdır.',
+      hero_kicker_en: 'Events · Activation · Stands',
+      hero_kicker_de: 'Events · Aktivierung · Messestände',
+      hero_title_en: 'We turn brands into experiences',
+      hero_title_de: 'Wir verwandeln Marken in Erlebnisse',
+      hero_subtitle_en: 'At every point where brands meet their target audiences, we bring creative ideas to life through strong field operations.',
+      hero_subtitle_de: 'Überall dort, wo Marken auf ihre Zielgruppen treffen, setzen wir kreative Ideen mit starker Umsetzung vor Ort um.',
+      about_title_en: 'We bring ideas to life and brands to the field!',
+      about_title_de: 'Wir bringen Ideen zum Leben und Marken ins Feld!',
+      about_body_1_en: 'We design events that connect brands with people and carefully bring every idea to life on the ground. We take on the whole process from planning to execution; with a strong team, creative solutions and meticulous coordination, we make sure every detail falls into place.',
+      about_body_1_de: 'Wir gestalten Events, die Marken mit Menschen zusammenbringen, und setzen jede Idee vor Ort mit Sorgfalt um. Wir übernehmen den gesamten Prozess von der Planung bis zur Umsetzung; mit einem starken Team, kreativen Lösungen und sorgfältiger Koordination sorgen wir dafür, dass jedes Detail sitzt.',
+      about_body_2_en: 'Our goal is to turn your brand\'s story into moments people take part in, experience and remember. At the heart of our work are open communication, trust and creating together.',
+      about_body_2_de: 'Unser Ziel ist es, die Geschichte Ihrer Marke in Momente zu verwandeln, an denen Menschen teilnehmen, die sie erleben und an die sie sich erinnern. Im Mittelpunkt unserer Arbeit stehen offene Kommunikation, Vertrauen und gemeinsames Schaffen.',
+      contact_address_en: 'Talatpaşa Mh. Gök Sk. 5, 34400<br>Kağıthane / Istanbul',
+      contact_address_de: 'Talatpaşa Mh. Gök Sk. 5, 34400<br>Kağıthane / Istanbul',
+      footer_bottom_en: '© 2026 Masterface Event Agency. All rights reserved.',
+      footer_bottom_de: '© 2026 Masterface Eventagentur. Alle Rechte vorbehalten.'
     },
     logos: [
       { label: 'Yves Rocher', image_url: 'assets/logos/yves-rocher.webp' },
@@ -90,39 +116,39 @@
       { label: 'Terra Pizza', image_url: 'assets/logos/terra-pizza.webp' }
     ],
     stats: [
-      { value: '150+', label: 'Tamamlanan proje' },
-      { value: '17+', label: 'Birlikte çalışılan marka' },
-      { value: '60+', label: 'Saha operasyonu yapılan şehir' },
-      { value: '2018', label: 'Kuruluş yılı' }
+      { value: '150+', label: 'Tamamlanan proje', i18n: { en: { label: 'Completed projects' }, de: { label: 'Abgeschlossene Projekte' } } },
+      { value: '17+', label: 'Birlikte çalışılan marka', i18n: { en: { label: 'Brands we work with' }, de: { label: 'Betreute Marken' } } },
+      { value: '60+', label: 'Saha operasyonu yapılan şehir', i18n: { en: { label: 'Cities with field operations' }, de: { label: 'Städte mit Einsätzen vor Ort' } } },
+      { value: '2018', label: 'Kuruluş yılı', i18n: { en: { label: 'Year founded' }, de: { label: 'Gründungsjahr' } } }
     ],
     services: [
-      { title: 'Festival ve Etkinlik Yönetimi', description: 'Markanızın yer almak istediği festival ve etkinliklerde; organizatör görüşmelerinden alan anlaşmalarına, sözleşme süreçlerinden stand kurulumu ve personel yönetimine kadar tüm süreci sizin için yönetiyoruz.', image_url: null },
-      { title: 'Roadshow ve Mobil Etkinlikler', description: 'Markanızı farklı şehirlerde, meydanlarda ve yaşam alanlarında tüketicilerle buluşturuyoruz. Ürün tanıtımı, sampling ve yaratıcı saha aktiviteleriyle dikkat çeken, enerjisi yüksek ve akılda kalıcı etkinlikler gerçekleştiriyoruz.', image_url: null },
-      { title: 'Sampling ve Tadım Etkinlikleri', description: 'Markanızın ürünlerini doğru yerde, doğru zamanda, doğru hedef kitleyle buluşturuyoruz. Tadım aktiviteleri, ürün dağıtımları ve yaratıcı saha uygulamalarıyla tüketicilerin markanızı yakından tanımasını ve deneyimlemesini sağlıyoruz.', image_url: null },
-      { title: 'Stand Tasarımı ve Üretimi', description: 'Markanızın kimliğini yansıtan, dikkat çekici ve işlevsel standlar tasarlıyor, üretiyor ve hayata geçiriyoruz. Fuar, festival ve etkinlik alanlarında tasarımdan üretime, kurulumdan söküme kadar tüm süreci yönetiyoruz.', image_url: null },
-      { title: 'Kurumsal Etkinlikler ve Organizasyonlar', description: 'Şirket içi kutlamalardan yılbaşı partilerine, motivasyon etkinliklerinden özel davetlere kadar her anı unutulmaz bir deneyime dönüştürüyoruz. Çalışanları bir araya getiren, eğlenceyi ve ekip ruhunu ön plana çıkaran organizasyonlar tasarlıyoruz.', image_url: null },
-      { title: 'Üniversite Şenlikleri ve Kariyer Günleri', description: 'Markanızı kampüslerin enerjisiyle buluşturuyoruz! Üniversite şenliklerinden kariyer günlerine, marka tanıtımlarından eğlenceli deneyim alanlarına kadar gençlerle doğrudan iletişim kurmanızı sağlayan etkinlikleri planlıyor ve hayata geçiriyoruz.', image_url: null },
-      { title: 'Toplantı ve Organizasyon Yönetimi', description: 'Bayi toplantılarından lansmanlara, şirket buluşmalarından özel davetlere kadar tüm organizasyonlarınızı profesyonelce planlıyoruz. Mekân seçiminden teknik altyapıya, sahne ve dekorasyondan operasyon yönetimine kadar her detayı sizin için düşünüyoruz.', image_url: null }
+      { title: 'Festival ve Etkinlik Yönetimi', description: 'Markanızın yer almak istediği festival ve etkinliklerde; organizatör görüşmelerinden alan anlaşmalarına, sözleşme süreçlerinden stand kurulumu ve personel yönetimine kadar tüm süreci sizin için yönetiyoruz.', image_url: null, i18n: { en: { title: 'Festival and Event Management', description: 'We manage the entire process for the festivals and events your brand wants to be part of: from organizer negotiations and space agreements to contracts, stand setup and staff management.' }, de: { title: 'Festival- und Eventmanagement', description: 'Für die Festivals und Events, bei denen Ihre Marke präsent sein möchte, übernehmen wir den gesamten Prozess: von Gesprächen mit den Veranstaltern und Flächenvereinbarungen über Verträge bis zu Standaufbau und Personalmanagement.' } } },
+      { title: 'Roadshow ve Mobil Etkinlikler', description: 'Markanızı farklı şehirlerde, meydanlarda ve yaşam alanlarında tüketicilerle buluşturuyoruz. Ürün tanıtımı, sampling ve yaratıcı saha aktiviteleriyle dikkat çeken, enerjisi yüksek ve akılda kalıcı etkinlikler gerçekleştiriyoruz.', image_url: null, i18n: { en: { title: 'Roadshows and Mobile Events', description: 'We bring your brand to consumers in different cities, squares and public spaces. With product launches, sampling and creative field activities, we deliver high-energy, memorable events that grab attention.' }, de: { title: 'Roadshows und mobile Events', description: 'Wir bringen Ihre Marke in verschiedenen Städten, auf Plätzen und in Lebensräumen zu den Konsumenten. Mit Produktpräsentationen, Sampling und kreativen Aktionen vor Ort realisieren wir aufmerksamkeitsstarke, energiegeladene und einprägsame Events.' } } },
+      { title: 'Sampling ve Tadım Etkinlikleri', description: 'Markanızın ürünlerini doğru yerde, doğru zamanda, doğru hedef kitleyle buluşturuyoruz. Tadım aktiviteleri, ürün dağıtımları ve yaratıcı saha uygulamalarıyla tüketicilerin markanızı yakından tanımasını ve deneyimlemesini sağlıyoruz.', image_url: null, i18n: { en: { title: 'Sampling and Tasting Events', description: 'We connect your products with the right audience at the right place and time. Tasting activities, product distribution and creative field executions let consumers get to know and experience your brand up close.' }, de: { title: 'Sampling und Verkostungen', description: 'Wir bringen Ihre Produkte zur richtigen Zeit am richtigen Ort zur richtigen Zielgruppe. Mit Verkostungen, Produktverteilungen und kreativen Aktionen vor Ort erleben Konsumenten Ihre Marke hautnah.' } } },
+      { title: 'Stand Tasarımı ve Üretimi', description: 'Markanızın kimliğini yansıtan, dikkat çekici ve işlevsel standlar tasarlıyor, üretiyor ve hayata geçiriyoruz. Fuar, festival ve etkinlik alanlarında tasarımdan üretime, kurulumdan söküme kadar tüm süreci yönetiyoruz.', image_url: null, i18n: { en: { title: 'Stand Design and Production', description: 'We design, produce and realize eye-catching, functional stands that reflect your brand identity. At trade fairs, festivals and event venues we manage everything from design to production, installation to dismantling.' }, de: { title: 'Standdesign und Standbau', description: 'Wir entwerfen, produzieren und realisieren auffällige, funktionale Stände, die Ihre Markenidentität widerspiegeln. Auf Messen, Festivals und Eventflächen betreuen wir alles von Design und Produktion bis zu Aufbau und Abbau.' } } },
+      { title: 'Kurumsal Etkinlikler ve Organizasyonlar', description: 'Şirket içi kutlamalardan yılbaşı partilerine, motivasyon etkinliklerinden özel davetlere kadar her anı unutulmaz bir deneyime dönüştürüyoruz. Çalışanları bir araya getiren, eğlenceyi ve ekip ruhunu ön plana çıkaran organizasyonlar tasarlıyoruz.', image_url: null, i18n: { en: { title: 'Corporate Events and Organizations', description: 'From in-house celebrations to New Year\'s parties, from motivation events to private invitations, we turn every moment into an unforgettable experience. We design events that bring employees together and put fun and team spirit first.' }, de: { title: 'Firmenevents und Organisation', description: 'Von internen Feiern über Silvesterpartys bis zu Motivationsevents und privaten Einladungen verwandeln wir jeden Moment in ein unvergessliches Erlebnis. Wir gestalten Veranstaltungen, die Mitarbeitende zusammenbringen und Spaß sowie Teamgeist in den Mittelpunkt stellen.' } } },
+      { title: 'Üniversite Şenlikleri ve Kariyer Günleri', description: 'Markanızı kampüslerin enerjisiyle buluşturuyoruz! Üniversite şenliklerinden kariyer günlerine, marka tanıtımlarından eğlenceli deneyim alanlarına kadar gençlerle doğrudan iletişim kurmanızı sağlayan etkinlikleri planlıyor ve hayata geçiriyoruz.', image_url: null, i18n: { en: { title: 'University Festivals and Career Days', description: 'We bring your brand together with the energy of campuses! From university festivals to career days, from brand presentations to fun experience areas, we plan and run events that let you communicate directly with young people.' }, de: { title: 'Uni-Festivals und Karrieretage', description: 'Wir bringen Ihre Marke mit der Energie der Campus zusammen! Von Uni-Festivals über Karrieretage und Markenpräsentationen bis zu spaßigen Erlebnisflächen planen und realisieren wir Events, mit denen Sie direkt mit jungen Menschen in Kontakt treten.' } } },
+      { title: 'Toplantı ve Organizasyon Yönetimi', description: 'Bayi toplantılarından lansmanlara, şirket buluşmalarından özel davetlere kadar tüm organizasyonlarınızı profesyonelce planlıyoruz. Mekân seçiminden teknik altyapıya, sahne ve dekorasyondan operasyon yönetimine kadar her detayı sizin için düşünüyoruz.', image_url: null, i18n: { en: { title: 'Meeting and Event Management', description: 'From dealer meetings to launches, company gatherings to private invitations, we plan all your events professionally. From venue selection to technical infrastructure, stage and decoration to operations management, we think of every detail for you.' }, de: { title: 'Meeting- und Eventmanagement', description: 'Von Händlertreffen über Produktlaunches und Firmentreffen bis zu privaten Einladungen planen wir all Ihre Veranstaltungen professionell. Von der Locationwahl über Technik und Bühne bis zu Dekoration und Operations kümmern wir uns um jedes Detail.' } } }
     ],
     categories: [], // kategori adı doğrudan projects.category metninden türer (varsayılanda)
     projects: [
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'gvm6JGzLG2M' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: '2rlN-i-ts2g' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'w_sGq5_zeI8' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'aQkfNgB5ZPg' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'HCjoKcrBuXo' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'nuOHaFKKMI4' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'Ji5Fh_YlIGs' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'ZbptAG-sf7c' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: '3A6C587v42o' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'cBD6wzq2nB4' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'uvXkcouXBbE' },
-      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', youtube_id: 'SSytzQygDXc' }
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'gvm6JGzLG2M' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: '2rlN-i-ts2g' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'w_sGq5_zeI8' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'aQkfNgB5ZPg' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'HCjoKcrBuXo' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'nuOHaFKKMI4' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'Ji5Fh_YlIGs' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'ZbptAG-sf7c' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: '3A6C587v42o' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'cBD6wzq2nB4' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'uvXkcouXBbE' },
+      { name: '[Proje adı]', brand: '[Marka]', city: '[Şehir]', year: '[Yıl]', category: '[Kategori]', category_i18n: PH_CATEGORY, i18n: PH_PROJECT, youtube_id: 'SSytzQygDXc' }
     ],
     process_steps: [
-      { title: 'Keşif ve brief', description: 'Markanızı, hedeflerinizi ve kitlenizi dinliyoruz. İhtiyaçlarınızı netleştirerek projenin yol haritasını birlikte oluşturuyoruz.' },
-      { title: 'Konsept ve planlama', description: 'Hedeflerinize uygun yaratıcı bir konsept geliştiriyoruz. Mekân, ekip, bütçe ve takvimi tüm detaylarıyla planlıyoruz.' },
-      { title: 'Saha operasyonu ve raporlama', description: 'Sahadaki tüm süreci koordine ediyor, planı hayata geçiriyoruz. Etkinlik sonunda sonuçları ve değerlendirmelerimizi sizinle paylaşıyoruz.' }
+      { title: 'Keşif ve brief', description: 'Markanızı, hedeflerinizi ve kitlenizi dinliyoruz. İhtiyaçlarınızı netleştirerek projenin yol haritasını birlikte oluşturuyoruz.', i18n: { en: { title: 'Discovery and brief', description: 'We listen to your brand, goals and audience. We clarify your needs and build the project roadmap together.' }, de: { title: 'Kennenlernen und Briefing', description: 'Wir hören Ihnen zu: Marke, Ziele und Zielgruppe. Wir schärfen Ihre Anforderungen und erarbeiten gemeinsam den Fahrplan des Projekts.' } } },
+      { title: 'Konsept ve planlama', description: 'Hedeflerinize uygun yaratıcı bir konsept geliştiriyoruz. Mekân, ekip, bütçe ve takvimi tüm detaylarıyla planlıyoruz.', i18n: { en: { title: 'Concept and planning', description: 'We develop a creative concept that fits your goals. We plan venue, team, budget and schedule in full detail.' }, de: { title: 'Konzept und Planung', description: 'Wir entwickeln ein kreatives Konzept, das zu Ihren Zielen passt. Location, Team, Budget und Zeitplan planen wir bis ins Detail.' } } },
+      { title: 'Saha operasyonu ve raporlama', description: 'Sahadaki tüm süreci koordine ediyor, planı hayata geçiriyoruz. Etkinlik sonunda sonuçları ve değerlendirmelerimizi sizinle paylaşıyoruz.', i18n: { en: { title: 'Field operations and reporting', description: 'We coordinate the entire process on site and bring the plan to life. After the event we share the results and our evaluations with you.' }, de: { title: 'Umsetzung vor Ort und Reporting', description: 'Wir koordinieren den gesamten Ablauf vor Ort und setzen den Plan um. Nach dem Event teilen wir Ergebnisse und Auswertungen mit Ihnen.' } } }
     ],
     social_links: [
       { platform: 'instagram', url: 'https://www.instagram.com/masterfaceagency/' }
@@ -137,21 +163,120 @@
     // form_fields: "Etkinlik türü" seçenekleri services başlıklarından TÜRER —
     // burada sabit bir seçenek listesi YOK, render sırasında services'ten üretilir.
     form_fields: [
-      { id: 'name', label: 'Adınız', type: 'text', required: true, width: 'half', sort_order: 1 },
-      { id: 'email', label: 'E-posta', type: 'email', required: true, width: 'half', sort_order: 2 },
-      { id: 'phone', label: 'Telefon', type: 'phone', required: false, width: 'half', sort_order: 3 },
-      { id: 'eventType', label: 'Etkinlik türü', type: 'select', required: true, width: 'half', sort_order: 4 },
-      { id: 'eventDate', label: 'Etkinlik tarihi', type: 'daterange', required: false, width: 'full', sort_order: 5 },
-      { id: 'message', label: 'Mesajınız', type: 'textarea', required: false, width: 'full', sort_order: 6 }
+      { id: 'name', label: 'Adınız', i18n: { en: { label: 'Your name' }, de: { label: 'Ihr Name' } }, type: 'text', required: true, width: 'half', sort_order: 1 },
+      { id: 'email', label: 'E-posta', i18n: { en: { label: 'Email' }, de: { label: 'E-Mail' } }, type: 'email', required: true, width: 'half', sort_order: 2 },
+      { id: 'phone', label: 'Telefon', i18n: { en: { label: 'Phone' }, de: { label: 'Telefon' } }, type: 'phone', required: false, width: 'half', sort_order: 3 },
+      { id: 'eventType', label: 'Etkinlik türü', i18n: { en: { label: 'Event type' }, de: { label: 'Veranstaltungsart' } }, type: 'select', required: true, width: 'half', sort_order: 4 },
+      { id: 'eventDate', label: 'Etkinlik tarihi', i18n: { en: { label: 'Event date' }, de: { label: 'Veranstaltungsdatum' } }, type: 'daterange', required: false, width: 'full', sort_order: 5 },
+      { id: 'message', label: 'Mesajınız', i18n: { en: { label: 'Your message' }, de: { label: 'Ihre Nachricht' } }, type: 'textarea', required: false, width: 'full', sort_order: 6 }
     ]
   };
+  // @defaults-end
+
+  // ───────────────────────── Diller + arayüz metinleri ─────────────────────────
+  var LANGS = [
+    { code: 'tr', short: 'TR', name: 'Türkçe' },
+    { code: 'en', short: 'EN', name: 'English' },
+    { code: 'de', short: 'DE', name: 'Deutsch' }
+  ];
+  var UI = {
+    tr: {
+      title: 'Masterface | Markaları deneyime dönüştürüyoruz',
+      meta: 'Masterface — etkinlik, aktivasyon ve stand ajansı. Fikirleri hayata, markaları sahaya taşıyoruz.',
+      menu: 'Menü', nav_projects: 'Projeler', nav_services: 'Hizmetler', nav_about: 'Hakkımızda', nav_refs: 'Referanslar', nav_contact: 'İletişim',
+      cta_quote: 'Teklif Al', lang_label: 'Dil',
+      hero_cta1: 'Projelerimizi İncele', hero_cta2: 'Görüşme Talep Et',
+      logos_label: 'Birlikte çalıştığımız markalar',
+      services_kicker: 'Hizmetlerimiz', services_h2: 'Fikirden sahaya, tüm süreç tek ekipte',
+      svc_cta_title: 'Başka bir ihtiyacınız mı var?', svc_cta_link: 'Teklif Alın →', svc_placeholder: '[Hizmet görseli / döngü video]',
+      projects_kicker: 'Projeler', projects_h2: 'Sahada ürettiklerimiz', all: 'Tümü',
+      process_kicker: 'Nasıl çalışıyoruz', process_h2: 'Üç adımda uçtan uca yönetim',
+      about_kicker: 'Hakkımızda', gal_prev: 'Önceki', gal_next: 'Sonraki', gal_alt: 'Masterface sahadan kare',
+      contact_kicker: 'İletişim', contact_h2: 'Etkinliğinizi birlikte planlayalım',
+      k_address: 'Adres', k_phone: 'Telefon', k_email: 'E-posta', k_instagram: 'Instagram', map_link: "Google Haritalar'da görüntüle",
+      single_day: 'Tek gün sürecek', start: 'Başlangıç', end: 'Bitiş', other: 'Diğer',
+      submit: 'Teklif İste →', sending: 'Gönderiliyor…', ok: 'Talebiniz alındı, en kısa sürede dönüş yapacağız.',
+      err: 'Bir şeyler ters gitti, lütfen tekrar deneyin veya WhatsApp üzerinden yazın.',
+      wa: 'WhatsApp ile yazın', footer_tag: 'Markaları deneyime dönüştürüyoruz', privacy: 'Gizlilik ve KVKK'
+    },
+    en: {
+      title: 'Masterface | We turn brands into experiences',
+      meta: 'Masterface — event, activation and stand agency. We bring ideas to life and brands to the field.',
+      menu: 'Menu', nav_projects: 'Projects', nav_services: 'Services', nav_about: 'About', nav_refs: 'References', nav_contact: 'Contact',
+      cta_quote: 'Get a Quote', lang_label: 'Language',
+      hero_cta1: 'See Our Projects', hero_cta2: 'Request a Meeting',
+      logos_label: 'Brands we work with',
+      services_kicker: 'Our Services', services_h2: 'From idea to field, the whole process in one team',
+      svc_cta_title: 'Need something else?', svc_cta_link: 'Get a Quote →', svc_placeholder: '[Service image / loop video]',
+      projects_kicker: 'Projects', projects_h2: 'What we create in the field', all: 'All',
+      process_kicker: 'How we work', process_h2: 'End-to-end management in three steps',
+      about_kicker: 'About Us', gal_prev: 'Previous', gal_next: 'Next', gal_alt: 'Masterface field photo',
+      contact_kicker: 'Contact', contact_h2: "Let's plan your event together",
+      k_address: 'Address', k_phone: 'Phone', k_email: 'Email', k_instagram: 'Instagram', map_link: 'View on Google Maps',
+      single_day: 'One day only', start: 'Start', end: 'End', other: 'Other',
+      submit: 'Request a Quote →', sending: 'Sending…', ok: "We've received your request and will get back to you shortly.",
+      err: 'Something went wrong. Please try again or write to us on WhatsApp.',
+      wa: 'Message us on WhatsApp', footer_tag: 'We turn brands into experiences', privacy: 'Privacy Policy'
+    },
+    de: {
+      title: 'Masterface | Wir verwandeln Marken in Erlebnisse',
+      meta: 'Masterface — Agentur für Events, Aktivierung und Messestände. Wir bringen Ideen zum Leben und Marken ins Feld.',
+      menu: 'Menü', nav_projects: 'Projekte', nav_services: 'Leistungen', nav_about: 'Über uns', nav_refs: 'Referenzen', nav_contact: 'Kontakt',
+      cta_quote: 'Angebot anfordern', lang_label: 'Sprache',
+      hero_cta1: 'Unsere Projekte ansehen', hero_cta2: 'Gespräch anfragen',
+      logos_label: 'Marken, mit denen wir arbeiten',
+      services_kicker: 'Unsere Leistungen', services_h2: 'Von der Idee bis zum Einsatz — der ganze Prozess in einem Team',
+      svc_cta_title: 'Sie haben einen anderen Bedarf?', svc_cta_link: 'Angebot anfordern →', svc_placeholder: '[Leistungsbild / Loop-Video]',
+      projects_kicker: 'Projekte', projects_h2: 'Was wir vor Ort umsetzen', all: 'Alle',
+      process_kicker: 'So arbeiten wir', process_h2: 'Ganzheitliches Management in drei Schritten',
+      about_kicker: 'Über uns', gal_prev: 'Zurück', gal_next: 'Weiter', gal_alt: 'Masterface Foto vom Einsatz',
+      contact_kicker: 'Kontakt', contact_h2: 'Planen wir Ihr Event gemeinsam',
+      k_address: 'Adresse', k_phone: 'Telefon', k_email: 'E-Mail', k_instagram: 'Instagram', map_link: 'In Google Maps ansehen',
+      single_day: 'Eintägig', start: 'Beginn', end: 'Ende', other: 'Sonstiges',
+      submit: 'Angebot anfragen →', sending: 'Wird gesendet…', ok: 'Ihre Anfrage ist eingegangen. Wir melden uns in Kürze.',
+      err: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns über WhatsApp.',
+      wa: 'Per WhatsApp schreiben', footer_tag: 'Wir verwandeln Marken in Erlebnisse', privacy: 'Datenschutz'
+    }
+  };
+
+  var state = { lang: 'tr', data: null, filter: '__all', singleDay: false };
+  var LANG_KEY = 'mf_lang';
+
+  function isLang(c) { return LANGS.some(function (l) { return l.code === c; }); }
+  function getInitialLang() {
+    try {
+      var q = new URLSearchParams(location.search).get('lang');
+      if (q && isLang(q)) return q;
+    } catch (e) {}
+    try {
+      var saved = localStorage.getItem(LANG_KEY);
+      if (saved && isLang(saved)) return saved;
+    } catch (e) {}
+    return 'tr'; // ana dil
+  }
+  function ui(key) { return (UI[state.lang] && UI[state.lang][key]) || UI.tr[key] || ''; }
+  // Kayıt alanı: dil Türkçe değilse item.i18n[dil][alan], boşsa Türkçe alan
+  function L(item, field) {
+    if (!item) return '';
+    if (state.lang !== 'tr' && item.i18n && item.i18n[state.lang]) {
+      var v = item.i18n[state.lang][field];
+      if (v != null && String(v).trim() !== '') return v;
+    }
+    return item[field];
+  }
+  // Site metni: dil Türkçe değilse `anahtar_en` / `anahtar_de`, boşsa Türkçe
+  function T(key) {
+    var t = state.data.site_texts;
+    if (state.lang !== 'tr') {
+      var v = t[key + '_' + state.lang];
+      if (v != null && String(v).trim() !== '') return v;
+    }
+    return t[key];
+  }
 
   // ───────────────────────── Veri yükleme ─────────────────────────
   async function loadData() {
-    // Tüm tablolar paralel (tek seferde) çekilir — Supabase yavaş/erişilemez
-    // olsa bile her tablo kendi 4sn'lik zaman aşımıyla bağımsız döner, bu
-    // yüzden toplam bekleme süresi tabloların TOPLAMI değil, en yavaş
-    // tekil sorgu kadar olur.
+    // Tüm tablolar paralel çekilir; her biri kendi zaman aşımıyla bağımsız döner.
     var results = await Promise.all([
       fetchTable('site_texts'),
       fetchTable('logos', 'sort_order'),
@@ -183,14 +308,24 @@
     var projects;
     if (projectsRows) {
       var catsById = {};
-      (categoriesRows || []).forEach(function (c) { catsById[c.id] = c.label; });
+      (categoriesRows || []).forEach(function (c) { catsById[c.id] = c; });
       projects = projectsRows.map(function (p) {
+        var cat = p.category_id && catsById[p.category_id];
+        var i18n = JSON.parse(JSON.stringify(p.i18n || {}));
+        ['en', 'de'].forEach(function (lg) {
+          i18n[lg] = i18n[lg] || {};
+          ['name', 'brand', 'city', 'year'].forEach(function (f) {
+            if (!p[f] && !i18n[lg][f]) i18n[lg][f] = PH_I18N[lg][f];
+          });
+        });
         return {
           name: p.name || '[Proje adı]',
           brand: p.brand || '[Marka]',
           city: p.city || '[Şehir]',
           year: p.year || '[Yıl]',
-          category: (p.category_id && catsById[p.category_id]) || '[Kategori]',
+          category: (cat && cat.label) || '[Kategori]',
+          category_i18n: cat ? (cat.i18n || {}) : PH_CATEGORY,
+          i18n: i18n,
           youtube_id: p.youtube_id || ''
         };
       });
@@ -214,18 +349,41 @@
     });
   }
 
-  // ───────────────────────── Render: Hero / Hakkımızda metinleri / İletişim ─────────────────────────
-  function renderTexts(t) {
-    var set = function (id, html) { var n = document.getElementById(id); if (n) n.innerHTML = html; };
-    set('hero-kicker', escapeHtml(t.hero_kicker));
-    set('hero-title', escapeHtml(t.hero_title));
-    set('hero-subtitle', escapeHtml(t.hero_subtitle));
-    set('about-title', escapeHtml(t.about_title));
-    set('about-body-1', escapeHtml(t.about_body_1));
-    set('about-body-2', escapeHtml(t.about_body_2));
-    set('contact-address', t.contact_address);
-    set('footer-bottom', escapeHtml(t.footer_bottom));
+  // ───────────────────────── Statik metinler (data-i18n) ─────────────────────────
+  function applyStaticI18n() {
+    document.documentElement.lang = state.lang;
+    document.title = ui('title');
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', ui('meta'));
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (n) {
+      n.textContent = ui(n.getAttribute('data-i18n'));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-aria]'), function (n) {
+      n.setAttribute('aria-label', ui(n.getAttribute('data-i18n-aria')));
+    });
+    // map linkinde ikon korunur, sadece metin düğümü değişir (data-i18n span içinde)
+    var cur = document.getElementById('lang-current');
+    if (cur) cur.textContent = state.lang.toUpperCase();
+    Array.prototype.forEach.call(document.querySelectorAll('#lang-menu [data-lang]'), function (b) {
+      var on = b.getAttribute('data-lang') === state.lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
 
+  // ───────────────────────── Render: Hero / Hakkımızda metinleri / İletişim ─────────────────────────
+  function renderTexts() {
+    var set = function (id, html) { var n = document.getElementById(id); if (n) n.innerHTML = html; };
+    set('hero-kicker', escapeHtml(T('hero_kicker')));
+    set('hero-title', escapeHtml(T('hero_title')));
+    set('hero-subtitle', escapeHtml(T('hero_subtitle')));
+    set('about-title', escapeHtml(T('about_title')));
+    set('about-body-1', escapeHtml(T('about_body_1')));
+    set('about-body-2', escapeHtml(T('about_body_2')));
+    set('contact-address', T('contact_address'));
+    set('footer-bottom', escapeHtml(T('footer_bottom')));
+
+    var t = state.data.site_texts;
     var phone = document.getElementById('contact-phone');
     if (phone) { phone.href = 'tel:' + t.contact_phone_tel; phone.textContent = t.contact_phone_display; }
     var email = document.getElementById('contact-email');
@@ -267,18 +425,46 @@
     var btn = document.getElementById('nav-toggle');
     var nav = document.getElementById('site-nav');
     if (!btn || !nav) return;
+    function closeNav() {
+      nav.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
     btn.addEventListener('click', function () {
       var isOpen = nav.classList.toggle('open');
       btn.classList.toggle('open', isOpen);
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
     Array.prototype.forEach.call(nav.querySelectorAll('a'), function (a) {
-      a.addEventListener('click', function () {
-        nav.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
+      a.addEventListener('click', closeNav);
+    });
+  }
+
+  // ───────────────────────── Dil seçici (açılır menü) ─────────────────────────
+  function initLangSwitch() {
+    var box = document.getElementById('lang-switch');
+    var btn = document.getElementById('lang-btn');
+    if (!box || !btn) return;
+    function setOpen(o) {
+      box.classList.toggle('open', o);
+      btn.setAttribute('aria-expanded', o ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!box.classList.contains('open')); });
+    Array.prototype.forEach.call(box.querySelectorAll('[data-lang]'), function (b) {
+      b.addEventListener('click', function () {
+        setLang(b.getAttribute('data-lang'));
+        setOpen(false);
       });
     });
+    document.addEventListener('click', function (e) { if (!box.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  function setLang(code) {
+    if (!isLang(code) || code === state.lang) return;
+    state.lang = code;
+    try { localStorage.setItem(LANG_KEY, code); } catch (e) {}
+    renderAll();
   }
 
   // ───────────────────────── Render: Logo marquee ─────────────────────────
@@ -309,7 +495,7 @@
     stats.forEach(function (s) {
       var item = el('div', 'stat-item');
       item.appendChild(el('div', 'value', escapeHtml(s.value)));
-      item.appendChild(el('div', 'label', escapeHtml(s.label)));
+      item.appendChild(el('div', 'label', escapeHtml(L(s, 'label'))));
       grid.appendChild(item);
     });
   }
@@ -323,22 +509,22 @@
       var card = el('article', 'service-card');
       var thumb = el('div', 'thumb');
       if (svc.image_url) {
-        var img = el('img'); img.src = svc.image_url; img.alt = svc.title || '';
+        var img = el('img'); img.src = svc.image_url; img.alt = L(svc, 'title') || '';
         thumb.appendChild(img);
       } else {
-        thumb.textContent = '[Hizmet görseli / döngü video]';
+        thumb.textContent = ui('svc_placeholder');
       }
       card.appendChild(thumb);
       var head = el('div', 'head');
       head.appendChild(el('span', 'no', String(i + 1).padStart(2, '0')));
-      head.appendChild(el('h3', null, escapeHtml(svc.title)));
+      head.appendChild(el('h3', null, escapeHtml(L(svc, 'title'))));
       card.appendChild(head);
-      card.appendChild(el('p', null, escapeHtml(svc.description)));
+      card.appendChild(el('p', null, escapeHtml(L(svc, 'description'))));
       grid.appendChild(card);
     });
     var cta = el('article', 'service-cta');
-    cta.appendChild(el('h3', null, 'Başka bir ihtiyacınız mı var?'));
-    var a = el('a', null, 'Teklif Alın →'); a.href = '#iletisim';
+    cta.appendChild(el('h3', null, escapeHtml(ui('svc_cta_title'))));
+    var a = el('a', null, escapeHtml(ui('svc_cta_link'))); a.href = '#iletisim';
     cta.appendChild(a);
     grid.appendChild(cta);
   }
@@ -351,37 +537,44 @@
     steps.forEach(function (s, i) {
       var card = el('div', 'process-card');
       card.appendChild(el('div', 'no', String(i + 1).padStart(2, '0')));
-      card.appendChild(el('h3', null, escapeHtml(s.title)));
-      card.appendChild(el('p', null, escapeHtml(s.description)));
+      card.appendChild(el('h3', null, escapeHtml(L(s, 'title'))));
+      card.appendChild(el('p', null, escapeHtml(L(s, 'description'))));
       grid.appendChild(card);
     });
   }
 
   // ───────────────────────── Render: Projects + filtre chip'leri ─────────────────────────
-  var projectState = { filter: 'Tümü', allProjects: [] };
+  // Filtre anahtarı dilden bağımsız (Türkçe kategori adı) — dil değişince seçim korunur.
+  function catLabel(p) {
+    return L({ label: p.category, i18n: p.category_i18n }, 'label');
+  }
 
   function renderChipsAndProjects() {
     var chipsWrap = document.getElementById('chips');
     var grid = document.getElementById('projects-grid');
     if (!chipsWrap || !grid) return;
+    var all = state.data.projects;
 
-    var uniqueCats = Array.from(new Set(projectState.allProjects.map(function (p) { return p.category; })));
-    var catList = ['Tümü'].concat(uniqueCats);
+    var cats = [];
+    var seen = {};
+    all.forEach(function (p) {
+      if (!seen[p.category]) { seen[p.category] = true; cats.push({ key: p.category, label: catLabel(p) }); }
+    });
+    if (state.filter !== '__all' && !seen[state.filter]) state.filter = '__all';
+    var chipList = [{ key: '__all', label: ui('all') }].concat(cats);
 
     chipsWrap.innerHTML = '';
-    catList.forEach(function (c) {
-      var btn = el('button', 'chip' + (c === projectState.filter ? ' active' : ''), escapeHtml(c));
+    chipList.forEach(function (c) {
+      var btn = el('button', 'chip' + (c.key === state.filter ? ' active' : ''), escapeHtml(c.label));
       btn.type = 'button';
       btn.addEventListener('click', function () {
-        projectState.filter = c;
+        state.filter = c.key;
         renderChipsAndProjects();
       });
       chipsWrap.appendChild(btn);
     });
 
-    var filtered = projectState.filter === 'Tümü'
-      ? projectState.allProjects
-      : projectState.allProjects.filter(function (p) { return p.category === projectState.filter; });
+    var filtered = state.filter === '__all' ? all : all.filter(function (p) { return p.category === state.filter; });
 
     grid.innerHTML = '';
     filtered.forEach(function (p) {
@@ -390,27 +583,21 @@
       var article = el('article', 'project-card');
       var a = el('a', 'thumb');
       a.href = url; a.target = '_blank'; a.rel = 'noopener';
-      var img = el('img'); img.src = thumb; img.alt = p.name;
+      var img = el('img'); img.src = thumb; img.alt = L(p, 'name');
       a.appendChild(img);
       a.appendChild(el('div', 'grad'));
-      a.appendChild(el('div', 'cat', escapeHtml(p.category)));
+      a.appendChild(el('div', 'cat', escapeHtml(catLabel(p))));
       var play = el('div', 'play');
       play.innerHTML = '<span><svg width="20" height="20" viewBox="0 0 20 20" fill="#111113"><path d="M5 3l12 7-12 7V3z"></path></svg></span>';
       a.appendChild(play);
       article.appendChild(a);
       var meta = el('div', 'meta');
-      meta.appendChild(el('h3', null, escapeHtml(p.name)));
-      meta.appendChild(el('span', 'year', escapeHtml(p.year)));
+      meta.appendChild(el('h3', null, escapeHtml(L(p, 'name'))));
+      meta.appendChild(el('span', 'year', escapeHtml(L(p, 'year'))));
       article.appendChild(meta);
-      article.appendChild(el('div', 'sub', escapeHtml(p.brand) + ' · ' + escapeHtml(p.city)));
+      article.appendChild(el('div', 'sub', escapeHtml(L(p, 'brand')) + ' · ' + escapeHtml(L(p, 'city'))));
       grid.appendChild(article);
     });
-  }
-
-  function renderProjects(projects) {
-    projectState.allProjects = projects;
-    projectState.filter = 'Tümü';
-    renderChipsAndProjects();
   }
 
   // ───────────────────────── Render: Hakkımızda galeri (kart yığını) ─────────────────────────
@@ -436,7 +623,7 @@
       card.style.cssText = depthStyle;
       var img = el('img');
       img.src = photo.image_url;
-      img.alt = 'Masterface sahadan kare';
+      img.alt = ui('gal_alt');
       card.appendChild(img);
       card.addEventListener('click', function () { galleryState.index++; renderGallery(); });
       stack.appendChild(card);
@@ -455,21 +642,25 @@
   }
 
   // ───────────────────────── Render: İletişim formu ─────────────────────────
-  var formState = { singleDay: false };
-
   function fieldLabel(f) {
-    return escapeHtml(f.label) + (f.required ? ' *' : '');
+    return escapeHtml(L(f, 'label')) + (f.required ? ' *' : '');
   }
 
-  function renderForm(fields, services) {
+  function renderForm() {
     var wrap = document.getElementById('contact-fields');
     if (!wrap) return;
+    var fields = state.data.formFields;
+    var services = state.data.services;
+
+    // Dil değişince yazılmış değerler kaybolmasın
+    var saved = {};
+    Array.prototype.forEach.call(wrap.querySelectorAll('[name]'), function (n) { saved[n.name] = n.value; });
     wrap.innerHTML = '';
 
-    // "Etkinlik türü" (select) seçenekleri her zaman services başlıklarından
-    // türetilir — iki yerde ayrı ayrı tutulan bir liste YOK, bu yüzden
-    // Hizmetlerimiz güncellendiğinde form otomatik senkron kalır.
-    var serviceOptions = services.map(function (s) { return s.title; }).concat(['Diğer']);
+    // "Etkinlik türü" seçenekleri services'ten türer. Gönderilen değer her zaman
+    // Türkçe başlıktır (panelde tutarlı görünsün); ekranda seçili dildeki ad görünür.
+    var serviceOptions = services.map(function (s) { return { value: s.title, label: L(s, 'title') }; })
+      .concat([{ value: 'Diğer', label: ui('other') }]);
 
     fields.forEach(function (f) {
       var widthClass = f.width === 'full' ? 'full' : 'half';
@@ -484,37 +675,41 @@
         var checkRow = el('label', 'daterange-check');
         var checkbox = el('input');
         checkbox.type = 'checkbox';
-        checkbox.checked = formState.singleDay;
+        checkbox.checked = state.singleDay;
         checkRow.appendChild(checkbox);
-        checkRow.appendChild(document.createTextNode('Tek gün sürecek'));
+        checkRow.appendChild(document.createTextNode(ui('single_day')));
         block.appendChild(checkRow);
 
         var dateArea = el('div');
         block.appendChild(dateArea);
 
-        function renderDateArea() {
+        var renderDateArea = function () {
           dateArea.innerHTML = '';
-          if (formState.singleDay) {
+          if (state.singleDay) {
             var single = el('input');
             single.type = 'date'; single.name = f.id; single.style.width = '100%';
+            if (saved[f.id]) single.value = saved[f.id];
             dateArea.appendChild(single);
           } else {
             var row = el('div', 'fields-row');
             var startLabel = el('label', 'field half'); startLabel.style.fontSize = '13px';
-            startLabel.appendChild(document.createTextNode('Başlangıç'));
+            startLabel.appendChild(document.createTextNode(ui('start')));
             var start = el('input'); start.type = 'date'; start.name = f.id + 'Start';
+            if (saved[f.id + 'Start']) start.value = saved[f.id + 'Start'];
             startLabel.appendChild(start);
             var endLabel = el('label', 'field half'); endLabel.style.fontSize = '13px';
-            endLabel.appendChild(document.createTextNode('Bitiş'));
+            endLabel.appendChild(document.createTextNode(ui('end')));
             var end = el('input'); end.type = 'date'; end.name = f.id + 'End';
+            if (saved[f.id + 'End']) end.value = saved[f.id + 'End'];
             endLabel.appendChild(end);
             row.appendChild(startLabel); row.appendChild(endLabel);
             dateArea.appendChild(row);
           }
-        }
+        };
         renderDateArea();
         checkbox.addEventListener('change', function () {
-          formState.singleDay = checkbox.checked;
+          state.singleDay = checkbox.checked;
+          saved = {};
           renderDateArea();
         });
         wrap.appendChild(block);
@@ -527,10 +722,12 @@
       if (f.type === 'select') {
         input = el('select');
         input.name = f.id;
-        var opts = (f.options && f.options.length) ? f.options : serviceOptions;
+        var opts = (f.options && f.options.length)
+          ? f.options.map(function (o) { return { value: o, label: o }; })
+          : serviceOptions;
         opts.forEach(function (opt) {
-          var o = el('option', null, escapeHtml(opt));
-          o.value = opt;
+          var o = el('option', null, escapeHtml(opt.label));
+          o.value = opt.value;
           input.appendChild(o);
         });
       } else if (f.type === 'textarea') {
@@ -543,12 +740,13 @@
         input.name = f.id;
       }
       if (f.required) input.required = true;
+      if (saved[f.id] != null) input.value = saved[f.id];
       label.appendChild(input);
       wrap.appendChild(label);
     });
   }
 
-  function initFormSubmit(recipients) {
+  function initFormSubmit() {
     var form = document.getElementById('contact-form');
     var feedback = document.getElementById('contact-feedback');
     var submitBtn = document.getElementById('contact-submit');
@@ -559,8 +757,9 @@
       Array.prototype.forEach.call(form.elements, function (field) {
         if (field.name) payload[field.name] = field.value;
       });
+      payload.lang = state.lang; // talebin hangi dilde geldiği panelde görünür
       if (feedback) feedback.innerHTML = '';
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Gönderiliyor…'; }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = ui('sending'); }
       try {
         if (supabase) {
           var res = await supabase.from('form_submissions').insert([{ payload: payload }]);
@@ -568,34 +767,55 @@
         } else {
           console.info('Supabase bağlı değil, form verisi gönderilmedi (test modu):', payload);
         }
-        if (feedback) feedback.appendChild(el('div', 'form-note ok', 'Talebiniz alındı, en kısa sürede dönüş yapacağız.'));
+        if (feedback) feedback.appendChild(el('div', 'form-note ok', escapeHtml(ui('ok'))));
         form.reset();
       } catch (err) {
         console.error(err);
-        if (feedback) feedback.appendChild(el('div', 'form-note err', 'Bir şeyler ters gitti, lütfen tekrar deneyin veya WhatsApp üzerinden yazın.'));
+        if (feedback) feedback.appendChild(el('div', 'form-note err', escapeHtml(ui('err'))));
       } finally {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Teklif İste →'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = ui('submit'); }
       }
     });
   }
 
+  // ───────────────────────── Tümünü çiz (dil değişince de çağrılır) ─────────────────────────
+  function renderAll() {
+    var d = state.data;
+    applyStaticI18n();
+    if (!d) return;
+    renderTexts();
+    renderStats(d.stats);
+    renderServices(d.services);
+    renderProcess(d.processSteps);
+    renderChipsAndProjects();
+    renderGallery();
+    renderForm();
+    var fb = document.getElementById('contact-feedback');
+    if (fb) fb.innerHTML = '';
+  }
+
   // ───────────────────────── Başlat ─────────────────────────
+  function defaultsData() {
+    return { site_texts: DEFAULTS.site_texts, logos: DEFAULTS.logos, stats: DEFAULTS.stats, services: DEFAULTS.services, processSteps: DEFAULTS.process_steps, galleryPhotos: DEFAULTS.gallery_photos, formFields: DEFAULTS.form_fields, projects: DEFAULTS.projects, socialLinks: DEFAULTS.social_links };
+  }
+
   async function init() {
-    var data = await loadData();
-    renderTexts(data.site_texts);
-    renderLogos(data.logos);
-    renderStats(data.stats);
-    renderServices(data.services);
-    renderProcess(data.processSteps);
-    renderProjects(data.projects);
-    initGallery(data.galleryPhotos);
-    renderForm(data.formFields, data.services);
+    // Türkçe dışı bir dil seçiliyse, veri gelene kadar Türkçe metin parlamasın diye
+    // önce varsayılan (çevrili) içerikle çiz.
+    if (state.lang !== 'tr') { state.data = defaultsData(); renderAll(); }
+    state.data = await loadData();
+    renderLogos(state.data.logos);
+    initGallery(state.data.galleryPhotos);
     initFormSubmit();
-    renderSocialLinks(data.socialLinks);
+    renderSocialLinks(state.data.socialLinks);
+    renderAll();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    state.lang = getInitialLang();
+    applyStaticI18n();   // veri gelmeden menü/başlıklar seçili dilde görünsün
     initNavToggle();
+    initLangSwitch();
     init();
   });
 })();
