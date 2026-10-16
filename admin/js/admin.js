@@ -216,8 +216,9 @@
     var bar = el('div', 'upload-bar');
     var btn = el('button', 'btn-secondary upload-btn', 'Görsel yükle');
     btn.type = 'button';
-    var file = el('input'); file.type = 'file'; file.accept = 'image/*'; file.hidden = true;
+    var file = el('input'); file.type = 'file'; file.accept = 'image/jpeg,image/png,image/webp,image/gif,image/avif,image/svg+xml'; file.hidden = true;
     var status = el('span', 'upload-status');
+    var spec = el('small', 'upload-spec', (f.spec || 'Önerilen: yatay (16:10) fotoğraf, en az 1200 px genişlik') + ' · JPG, PNG, WebP · en fazla ' + MAX_UPLOAD_MB + ' MB');
     var preview = el('img', 'upload-preview'); preview.alt = '';
     function showPreview() {
       var v = urlInput.value.trim();
@@ -232,6 +233,7 @@
     file.addEventListener('change', async function () {
       var fl = file.files && file.files[0];
       if (!fl) return;
+      if (!/^image\/(jpeg|png|webp|gif|avif|svg\+xml)$/.test(fl.type)) { status.textContent = 'Bu dosya türü desteklenmiyor (' + (fl.type || fl.name.split('.').pop()) + '). iPhone HEIC ise JPG olarak kaydedip yükleyin.'; status.className = 'upload-status err'; file.value = ''; return; }
       if (fl.size > MAX_UPLOAD_MB * 1024 * 1024) { status.textContent = 'Dosya ' + MAX_UPLOAD_MB + ' MB\'ı geçemez.'; status.className = 'upload-status err'; return; }
       btn.disabled = true; status.className = 'upload-status'; status.textContent = 'Yükleniyor…';
       try {
@@ -253,6 +255,7 @@
     });
     bar.appendChild(btn); bar.appendChild(status); bar.appendChild(file);
     label.appendChild(bar);
+    label.appendChild(spec);
     label.appendChild(preview);
   }
 
@@ -448,7 +451,7 @@
     fields: [
       { name: 'title', label: 'Başlık', type: 'text' },
       { name: 'description', label: 'Açıklama', type: 'textarea' },
-      { name: 'image_url', label: 'Görsel (opsiyonel)', type: 'image', folder: 'hizmetler' }
+      { name: 'image_url', label: 'Görsel (opsiyonel)', type: 'image', folder: 'hizmetler', spec: 'Önerilen: yatay (16:10) fotoğraf, ör. 1600×1000 px; kart içinde ortadan kırpılır' }
     ]
   });
 
