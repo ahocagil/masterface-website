@@ -108,16 +108,16 @@ header.site nav{display:flex;flex-wrap:wrap;gap:8px 32px;font-size:16px;color:va
 
 /* CONTACT */
 .contact-section{position:relative;background:var(--cream);color:var(--cream-ink);padding:104px clamp(20px,5vw,80px)}
-.contact-flex{display:flex;flex-wrap:wrap;gap:64px}
+.contact-flex{display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start}
 .contact-info{flex:1 1 400px;min-width:0}
 .contact-info h2{font-size:clamp(34px,4.5vw,64px);line-height:1.02;letter-spacing:-.03em;margin-bottom:32px}
 .info-rows{display:flex;flex-direction:column;gap:20px;font-size:19px}
 .info-rows .k{font-size:14px;color:var(--cream-muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
-.map-box{margin-top:32px}
-.map-box iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:16px;background:var(--cream-s1)}
+.map-wide{margin-top:56px}
+.map-box iframe{display:block;width:100%;height:clamp(260px,34vw,420px);border:0;border-radius:16px;background:var(--cream-s1)}
 .map-link{margin-top:12px;display:inline-flex;align-items:center;gap:8px;color:var(--cream-muted);font-weight:600}
 .map-link:hover{color:var(--cream-ink)}
-form.contact{flex:1 1 440px;min-width:0;background:#fff;border:1px solid var(--cream-line);border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:18px}
+form.contact{width:100%;min-width:0;background:#fff;border:1px solid var(--cream-line);border-radius:24px;padding:36px 36px 26px;display:flex;flex-direction:column;gap:18px}
 .fields-row{display:flex;flex-wrap:wrap;gap:18px}
 .field{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
 .field.half{flex:1 1 200px}
@@ -131,7 +131,9 @@ form.contact{flex:1 1 440px;min-width:0;background:#fff;border:1px solid var(--c
 .form-note{font-size:14px;margin-top:-6px}
 .form-note.ok{color:#1f7a3f}
 .form-note.err{color:#B8361A}
-.whatsapp-fab{position:absolute;right:clamp(20px,5vw,80px);bottom:24px;background:#25D366;color:#111113;font-weight:600;padding:14px 22px;border-radius:999px;box-shadow:0 8px 24px rgba(17,17,19,.25)}
+.contact-side{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px}
+#contact-feedback:empty{display:none}
+.whatsapp-fab{align-self:flex-end;display:inline-flex;align-items:center;background:#25D366;color:#111113;font-weight:600;padding:14px 22px;border-radius:999px;box-shadow:0 8px 24px rgba(17,17,19,.25)}
 
 /* FOOTER */
 footer.site{position:relative;padding:56px clamp(20px,5vw,80px) 40px}
