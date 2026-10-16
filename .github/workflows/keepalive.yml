@@ -1,0 +1,18 @@
+# Supabase ücretsiz planı 7 gün işlem olmayan projeyi duraklatır.
+# Bu iş her 3 günde bir veritabanına küçük bir okuma isteği atar (proje uyanık kalır).
+name: supabase-keepalive
+on:
+  schedule:
+    - cron: '17 6 */3 * *'
+  workflow_dispatch: {}
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ping Supabase
+        run: |
+          URL=$(grep -o "https://[a-z0-9]*\.supabase\.co" assets/js/config.js | head -1)
+          KEY=$(grep -o "sb_publishable_[A-Za-z0-9_-]*" assets/js/config.js | head -1)
+          echo "ping $URL"
+          curl -fsS "$URL/rest/v1/site_texts?select=key&limit=1" -H "apikey: $KEY" -H "Authorization: Bearer $KEY"
