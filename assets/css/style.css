@@ -39,7 +39,7 @@ header.site nav{display:flex;flex-wrap:wrap;gap:8px 32px;font-size:16px;color:va
 /* LOGO MARQUEE */
 .logos-section{position:relative;background:var(--bg-alt);padding:40px 0;overflow:hidden}
 .logos-section .label{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:24px;padding:0 clamp(20px,5vw,80px)}
-.logos-mask{position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.logos-mask{position:relative;overflow:hidden;touch-action:pan-y;-webkit-touch-callout:none;cursor:grab;user-select:none;-webkit-user-select:none}
 .logos-mask.dragging{cursor:grabbing}
 .logos-mask::before,.logos-mask::after{content:"";position:absolute;top:0;bottom:0;width:64px;z-index:2;pointer-events:none}
 .logos-mask::before{left:0;background:linear-gradient(90deg,var(--bg-alt),transparent)}

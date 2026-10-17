@@ -511,13 +511,35 @@
     function wrap() { if (half > 0) { x = ((x % half) + half) % half - half; } }
     function draw() { track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)'; }
     x = -0.01; wrap(); draw();
+    // iOS Safari/Chrome: dokunmatik için ayrı touch olayları (pointer olayları güvenilmez)
+    var tStartX = 0, tStartY = 0, tMode = '';
+    host.addEventListener('touchstart', function (e) {
+      var t = e.touches[0]; tStartX = lastX = t.clientX; tStartY = t.clientY; lastT = performance.now(); tMode = ''; vel = 0;
+    }, { passive: true });
+    host.addEventListener('touchmove', function (e) {
+      var t = e.touches[0];
+      if (!tMode) {
+        var ax = Math.abs(t.clientX - tStartX), ay = Math.abs(t.clientY - tStartY);
+        if (ax < 6 && ay < 6) return;
+        tMode = ax > ay ? 'h' : 'v';
+        if (tMode === 'h') { dragging = true; host.classList.add('dragging'); }
+      }
+      if (tMode !== 'h') return;
+      if (e.cancelable) e.preventDefault();
+      var now = performance.now(), dx = t.clientX - lastX, dt = Math.max(now - lastT, 1);
+      x += dx; vel = dx / dt * 1000; lastX = t.clientX; lastT = now; wrap(); draw();
+    }, { passive: false });
+    function tEnd() { dragging = false; tMode = ''; host.classList.remove('dragging'); }
+    host.addEventListener('touchend', tEnd, { passive: true });
+    host.addEventListener('touchcancel', tEnd, { passive: true });
     host.onpointerdown = function (e) {
+      if (e.pointerType === 'touch') return;
       dragging = true; vel = 0; lastX = e.clientX; lastT = performance.now();
       host.classList.add('dragging');
       try { host.setPointerCapture(e.pointerId); } catch (_) {}
     };
     host.onpointermove = function (e) {
-      if (!dragging) return;
+      if (!dragging || e.pointerType === 'touch') return;
       var now = performance.now(), dx = e.clientX - lastX, dt = Math.max(now - lastT, 1);
       x += dx; vel = dx / dt * 1000; lastX = e.clientX; lastT = now; wrap(); draw();
     };
@@ -854,12 +876,14 @@
     // Türkçe dışı bir dil seçiliyse, veri gelene kadar Türkçe metin parlamasın diye
     // önce varsayılan (çevrili) içerikle çiz.
     if (state.lang !== 'tr') { state.data = defaultsData(); renderAll(); }
+    var logosKey = '';
+    try { renderLogos(DEFAULTS.logos); logosKey = JSON.stringify(DEFAULTS.logos.map(function (l) { return l.image_url; })); } catch (_) {}
     state.data = await loadData();
     if (window.MF_THEME) { // panelden seçilen renk teması
       var theme = MF_THEME.fromTexts(state.data.site_texts);
       MF_THEME.apply(theme); MF_THEME.cache(theme);
     }
-    renderLogos(state.data.logos);
+    if (JSON.stringify(state.data.logos.map(function (l) { return l.image_url; })) !== logosKey) renderLogos(state.data.logos);
     initGallery(state.data.galleryPhotos);
     initFormSubmit();
     renderSocialLinks(state.data.socialLinks);
