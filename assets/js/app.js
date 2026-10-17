@@ -494,6 +494,48 @@
     }
     addSet(false);
     addSet(true);
+    startMarquee(track);
+  }
+
+  // Kayan logolar: JS ile (GPU transform) akar; parmak/fare ile sürüklenebilir, bırakınca devam eder.
+  var marqueeRAF = null;
+  function startMarquee(track) {
+    if (marqueeRAF) cancelAnimationFrame(marqueeRAF);
+    var host = track.parentNode;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var x = 0, vel = 0, SPEED = 40, dragging = false, hover = false, lastX = 0, lastT = 0, half = 0, prev = 0;
+    function measure() { half = track.scrollWidth / 2; }
+    measure();
+    window.addEventListener('resize', measure);
+    track.querySelectorAll('img').forEach(function (im) { if (!im.complete) im.addEventListener('load', measure); });
+    function wrap() { if (half > 0) { x = ((x % half) + half) % half - half; } }
+    function draw() { track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)'; }
+    x = -0.01; wrap(); draw();
+    host.onpointerdown = function (e) {
+      dragging = true; vel = 0; lastX = e.clientX; lastT = performance.now();
+      host.classList.add('dragging');
+      try { host.setPointerCapture(e.pointerId); } catch (_) {}
+    };
+    host.onpointermove = function (e) {
+      if (!dragging) return;
+      var now = performance.now(), dx = e.clientX - lastX, dt = Math.max(now - lastT, 1);
+      x += dx; vel = dx / dt * 1000; lastX = e.clientX; lastT = now; wrap(); draw();
+    };
+    function end() { dragging = false; host.classList.remove('dragging'); }
+    host.onpointerup = end; host.onpointercancel = end;
+    host.onmouseenter = function () { hover = true; };
+    host.onmouseleave = function () { hover = false; };
+    function tick(t) {
+      var dt = prev ? Math.min((t - prev) / 1000, 0.05) : 0; prev = t;
+      if (!dragging) {
+        if (Math.abs(vel) > SPEED) vel *= Math.pow(0.04, dt); // sürükleme ivmesi yavaşça söner
+        else if (!reduce && !hover) vel = -SPEED;
+        else vel = 0;
+        x += vel * dt; wrap(); draw();
+      }
+      marqueeRAF = requestAnimationFrame(tick);
+    }
+    marqueeRAF = requestAnimationFrame(tick);
   }
 
   // ───────────────────────── Render: Stats ─────────────────────────
