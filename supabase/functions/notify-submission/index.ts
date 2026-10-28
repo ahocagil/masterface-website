@@ -1,6 +1,6 @@
 // Masterface — yeni form talebi bildirimi (SMTP, ek servis hesabı gerektirmez)
 // Gizli ayarlar (Supabase > Edge Functions > Secrets):
-//   SMTP_HOST (ör. mail.masterface.com.tr), SMTP_PORT (465), SMTP_USER (info@masterface.com.tr),
+//   SMTP_HOST (Natro: mx-out05.natrohost.com — mail.masterface.com.tr sertifikası uyuşmuyor), SMTP_PORT (465), SMTP_USER (info@masterface.com.tr),
 //   SMTP_PASS, WEBHOOK_SECRET (rastgele uzun bir metin; mail.sql'deki ile aynı), NOTIFY_TO (opsiyonel, varsayılan SMTP_USER)
 import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts";
 
@@ -31,7 +31,7 @@ Deno.serve(async (req) => {
       from: `Masterface Web <${user}>`,
       to,
       subject: "Yeni bir teklif talebiniz var — masterface.com.tr",
-      content: "Web sitesinden yeni bir teklif talebi geldi.\n\nGörmek için: https://masterface.com.tr/admin → Gelen Talepler",
+      content: "Web sitesinden yeni bir teklif talebi geldi.\r\n\r\nGörmek için: https://masterface.com.tr/admin → Gelen Talepler",
       html: `<p>Web sitesinden yeni bir teklif talebi geldi.</p><p><a href="https://masterface.com.tr/admin">Admin panelini aç → Gelen Talepler</a></p>`,
     });
     await client.close();
