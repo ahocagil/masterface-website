@@ -88,10 +88,13 @@ header.site nav{display:flex;flex-wrap:wrap;gap:8px 32px;font-size:16px;color:va
 
 /* PROCESS */
 .process-section{position:relative;background:var(--bg-alt);padding:104px clamp(20px,5vw,80px)}
-.process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
-.process-card{border:1px solid var(--border-light);border-radius:20px;padding:32px}
+.process-grid{display:grid;grid-template-columns:1fr;gap:48px}
+@media (min-width:900px){.process-grid{grid-template-columns:repeat(3,1fr);gap:32px}}
+.process-card{position:relative;border:1px solid var(--border-light);border-radius:20px;padding:32px}
+.process-card:not(:last-child)::after{content:"";position:absolute;width:24px;height:24px;background:var(--accent);-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12h16M14 6l6 6-6 6'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12h16M14 6l6 6-6 6'/></svg>") center/contain no-repeat;left:50%;bottom:-36px;transform:translateX(-50%) rotate(90deg)}
+@media (min-width:900px){.process-card:not(:last-child)::after{left:auto;right:-28px;bottom:auto;top:50%;transform:translateY(-50%)}}
 .process-card .no{font-weight:800;font-size:56px;line-height:1;color:var(--accent);font-family:'Bricolage Grotesque',sans-serif}
-.process-card h3{margin:20px 0 10px;font-size:26px;letter-spacing:-.02em}
+.process-card h3{margin:0 0 10px;font-size:26px;letter-spacing:-.02em}
 .process-card p{margin:0;color:var(--muted)}
 
 /* ABOUT + GALLERY */

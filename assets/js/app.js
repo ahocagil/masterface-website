@@ -589,7 +589,6 @@
       }
       card.appendChild(thumb);
       var head = el('div', 'head');
-      head.appendChild(el('span', 'no', String(i + 1).padStart(2, '0')));
       head.appendChild(el('h3', null, escapeHtml(L(svc, 'title'))));
       card.appendChild(head);
       card.appendChild(el('p', null, escapeHtml(L(svc, 'description'))));
@@ -609,7 +608,6 @@
     grid.innerHTML = '';
     steps.forEach(function (s, i) {
       var card = el('div', 'process-card');
-      card.appendChild(el('div', 'no', String(i + 1).padStart(2, '0')));
       card.appendChild(el('h3', null, escapeHtml(L(s, 'title'))));
       card.appendChild(el('p', null, escapeHtml(L(s, 'description'))));
       grid.appendChild(card);
