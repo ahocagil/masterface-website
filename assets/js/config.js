@@ -11,3 +11,6 @@ window.SUPABASE_URL = 'https://xqxjdegyyvvjrfvsvglf.supabase.co';
 // Girişe "@" içeren bir değer yazılırsa olduğu gibi (tam e-posta) kullanılır.
 window.ADMIN_EMAIL_DOMAIN = 'masterface.com.tr';
 window.SUPABASE_ANON_KEY ='sb_publishable_qP5lQ0z6JinCG4YOykMfOQ_0AY0KJCP';
+// Google Analytics 4 ölçüm kimliği (ör. 'G-XXXXXXXXXX'). Boşsa analitik ve çerez bannerı HİÇ yüklenmez.
+// Dolu olduğunda ziyaretçi "Kabul et" demeden analitik çalışmaz.
+window.GA_MEASUREMENT_ID = '';
